@@ -1,4 +1,4 @@
 var config = {
-    publicPath: ""
+    publicPath: ''
 }
-module.exports = config;
+module.exports = config

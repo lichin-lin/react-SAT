@@ -1,7 +1,6 @@
-var Path = require('path');
-var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var config = require('./config.js');
+var path = require('path')
+var webpack = require('webpack')
+var HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
     devtool: 'cheap-module-eval-source-map',
@@ -13,45 +12,57 @@ module.exports = {
         './src/index.js'
     ],
     output: {
-        path: Path.join(__dirname, 'dist'),
+        path: path.join(__dirname, 'dist'),
         filename: 'bundle.js',
         publicPath: '/'
     },
-    // require without Filename Extension
     resolve: {
-        extensions: ['', '.js', '.jsx', '.styl', '.html', '.ejs'],
-        packageMains: ['webpack', 'browser', 'web', 'browserify', ['jam', 'main'], 'main']
+        extensions: ['', '.js', '.jsx', '.styl', '.html'],
+        packageMains: [
+            'webpack', 'browser', 'web', 'browserify', [
+                'jam', 'main'], 'main']
     },
     module: {
+        preLoaders: [
+            {
+                test: /\.jsx?$/,
+                loader: 'eslint-loader',
+                include: path.join(__dirname, 'src/'),
+                exclude: /node_modules/
+            }
+        ],
         loaders: [
-        {
-            test: /\.(jsx|js)$/,
-            exclude: /node_modules/,
-            loaders: ['babel-loader'],
-            include: Path.join(__dirname, 'src/')
-        },
-        {
-            test: /\.sass$/, loader: "style!css!sass"
-        },
-        {
-            test: /\.css$/, loader: 'style!css'
-        },
-        {
-            test: /\.styl$/,
-            loader: 'style-loader!css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!stylus-loader'
-        },
-        {
-            test: /\.json$/, loader: 'json'
-        },
-        {
-            test: /\.(ttf|eot|png|gif|jpg|woff|woff2|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-            loader: "url-loader?limit=8192"
-        },
-        {
-            test: /\.(html|png)$/,
-            loader: "file?name=[path][name].[ext]&context=./src"
-        }
+            {
+                test: /\.(jsx|js)$/,
+                exclude: /node_modules/,
+                loaders: ['babel-loader'],
+                include: path.join(__dirname, 'src/')
+            },
+            {
+                test: /\.sass$/, loader: 'style!css!sass'
+            },
+            {
+                test: /\.css$/, loader: 'style!css'
+            },
+            {
+                test: /\.styl$/,
+                loader: 'style-loader!css-loader!stylus-loader'
+            },
+            {
+                test: /\.json$/, loader: 'json'
+            },
+            {
+                test: /\.(ttf|eot|png|gif|jpg|woff|woff2|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                loader: 'url-loader?limit=8192'
+            },
+            {
+                test: /\.(html|png)$/,
+                loader: 'file?name=[path][name].[ext]&context=./src'
+            }
         ]
+    },
+    eslint: {
+        formatter: require('eslint-friendly-formatter')
     },
     plugins: [
         new webpack.DefinePlugin({
@@ -61,7 +72,7 @@ module.exports = {
         new webpack.HotModuleReplacementPlugin(),
         new HtmlWebpackPlugin({
             template: 'src/index.ejs',
-            inject: 'body'
+            inject: true
         })
-    ],
-};
+    ]
+}

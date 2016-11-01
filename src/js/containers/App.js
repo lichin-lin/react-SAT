@@ -1,18 +1,12 @@
-import React, { Component } from 'react';
-import DevTools from './DevTools';
+import App from './../components/App'
+import { connect } from 'react-redux'
 
-export default class App extends Component {
+const mapStateToProps = (state) => ({
 
-  render() {
-    return (
-      <div>
-        { this.props.children }
-        {
-          process.env.NODE_ENV !== 'production' ?
-            <DevTools /> :
-            <div></div>
-        }
-      </div>
-    );
-  }
-}
+})
+
+const mapDispatchToProps = (dispatch) => ({
+
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
