@@ -5,6 +5,7 @@ import RootRouter from './js/routes'
 import store from './js/stores/Store'
 import { chr, ord, mapArrayToObject, mapObject } from './js/utils/Base'
 require('./css/index.styl')
+require('bootstrap/dist/css/bootstrap.min.css')
 
 if (typeof (document) !== 'undefined' && window) {
     window.chr = chr

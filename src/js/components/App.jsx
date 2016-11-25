@@ -4,7 +4,6 @@ import Footer from './common/Footer'
 import Nav from './common/Nav'
 
 export default class App extends Component {
-
     render () {
         return (
             <div>
