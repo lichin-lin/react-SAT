@@ -1,7 +1,6 @@
 var path = require('path')
 var webpack = require('webpack')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
-
 module.exports = {
     devtool: 'cheap-module-eval-source-map',
     devServer: {
@@ -17,10 +16,13 @@ module.exports = {
         publicPath: '/'
     },
     resolve: {
-        extensions: ['', '.js', '.jsx', '.styl', '.html'],
-        packageMains: [
-            'webpack', 'browser', 'web', 'browserify', [
-                'jam', 'main'], 'main']
+        extensions: ['', '.js', '.jsx'],
+        alias: {
+            'src': path.join(__dirname, './src'),
+            'containers': path.join(__dirname, './src/js/containers'),
+            'components': path.join(__dirname, './src/js/components'),
+            'js': path.join(__dirname, './src/js')
+        }
     },
     module: {
         preLoaders: [

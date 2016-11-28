@@ -4,6 +4,11 @@ import Footer from './common/Footer'
 import Nav from './common/Nav'
 
 export default class App extends Component {
+    componentDidMount () {
+        console.log(this.props)
+        // this.props.FBLogin()
+        // this.props.FBLogout()
+    }
     render () {
         return (
             <div>
