@@ -4,21 +4,9 @@ const initialState = {}
 
 export default handleActions({
 
-    FBLogin: {
+    getUserData: {
         next (state, action) {
-            return {
-                ...action.payload
-            }
-        },
-        throw (state, action) {
-            return {
-                ...state
-            }
-        }
-    },
-
-    FBLogout: {
-        next (state, action) {
+            console.log(action.payload)
             return {
                 ...action.payload
             }

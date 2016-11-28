@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react'
+import React, {Component} from 'react'
 // import {connect} from 'react-redux'
 // import {firebase, helpers} from 'redux-react-firebase'
 // import FacebookLogin from 'react-facebook-login'
@@ -6,18 +6,18 @@ import React, {Component, PropTypes} from 'react'
 // const {isLoaded, isEmpty, dataToJS} = helpers
 
 export default class extends Component {
-    static propTypes = {
-        FBLogin: PropTypes.func.isRequired
-    };
-    static defaultProps = {
-    };
-    constructor (props) {
-        super(props)
-        this.FBLogin = this.FBLogin.bind(this)
-    }
-    FBLogin () {
-        this.props.FBLogin()
-    }
+    // static propTypes = {
+    //     FBLogin: PropTypes.func.isRequired
+    // };
+    // static defaultProps = {
+    // };
+    // constructor (props) {
+    //     super(props)
+    //     this.FBLogin = this.FBLogin.bind(this)
+    // }
+    // FBLogin () {
+    //     this.props.FBLogin()
+    // }
     render () {
         return (
         <div>
@@ -28,8 +28,7 @@ export default class extends Component {
               {/* {tableList} */}
             </ul>
             <input type="text" ref="newTodo" />
-            {/* <button onClick={handleAdd}>Add</button> */}
-            <button onClick={this.FBLogin}>login</button>
+            <button onClick={this.props.FBLogin}>login</button>
         </div>
         )
     }
