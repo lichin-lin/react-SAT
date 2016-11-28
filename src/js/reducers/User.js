@@ -6,7 +6,6 @@ export default handleActions({
 
     getUserData: {
         next (state, action) {
-            console.log(action.payload)
             return {
                 ...action.payload
             }

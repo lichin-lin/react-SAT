@@ -6,29 +6,39 @@ import React, {Component} from 'react'
 // const {isLoaded, isEmpty, dataToJS} = helpers
 
 export default class extends Component {
-    // static propTypes = {
-    //     FBLogin: PropTypes.func.isRequired
-    // };
-    // static defaultProps = {
-    // };
-    // constructor (props) {
-    //     super(props)
-    //     this.FBLogin = this.FBLogin.bind(this)
-    // }
-    // FBLogin () {
-    //     this.props.FBLogin()
-    // }
+    constructor (props) {
+        super(props)
+        this.state = {
+            message: ''
+        }
+        console.log(this.state)
+        this.FBLogin = this.FBLogin.bind(this)
+        this.onFormSubmit = this.onFormSubmit.bind(this)
+    }
+    onFormSubmit (event) {
+        event.preventDefault()
+        console.log(this.props.currentUser)
+    }
+    FBLogin () {
+        this.props.FBLogin()
+    }
     render () {
         return (
         <div>
             <br/>
             <br/>
             <h1>SAT table</h1>
-            <ul>
-              {/* {tableList} */}
-            </ul>
-            <input type="text" ref="newTodo" />
+            <input type="text" ref="newlogin" />
             <button onClick={this.props.FBLogin}>login</button>
+
+            <div className="col-md-6">
+                <form id="frmProfile" role="form" onSubmit={this.onFormSubmit}>
+                    <h2>Get User Profile</h2>
+                    <p>{this.state.message}</p>
+                    <p>{this.props.currentUser}</p>
+                    <button type="submit" className="btn btn-primary">Update</button>
+                </form>
+            </div>
         </div>
         )
     }

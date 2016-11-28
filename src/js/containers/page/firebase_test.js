@@ -3,7 +3,7 @@ import Component from './../../components/page/firebase_test'
 import Action from 'js/actions'
 
 const mapStateToProps = (state) => ({
-
+    return { currentUser: state.currentUser }
 })
 
 const mapDispatchToProps = (dispatch) => ({
