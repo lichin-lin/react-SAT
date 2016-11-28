@@ -1,6 +1,18 @@
 import common from './common'
-import page from './page'
+import App from './App'
+import Base from './Base'
+import Chart from './chart'
+import FirebaseTest from './FirebaseTest'
+import NotFound from './NotFound'
+import Score from './score'
+import Setting from './setting'
 export default {
     common,
-    page
+    App,
+    Base,
+    Chart,
+    FirebaseTest,
+    NotFound,
+    Score,
+    Setting
 }

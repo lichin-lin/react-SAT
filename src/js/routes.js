@@ -1,25 +1,22 @@
 import React, { Component } from 'react'
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'
-import App from './containers/App'
-import Base from './containers/Base'
-import NotFound from './components/NotFound'
 import store from './stores/Store'
 import { syncHistoryWithStore } from 'react-router-redux'
 const history = syncHistoryWithStore(browserHistory, store)
 
-import Components from './components'
+// import Components from 'js/components'
+import Containers from 'js/containers'
 
 export default class Root extends Component {
     render () {
         return (
             <Router history={history}>
-                <Route path="/" component={App}>
-                    <IndexRoute component={Base} />
-                    <Route path="setting" component={Components.page.setting} />
-                    <Route path="score" component={Components.page.score} />
-                    <Route path="chart" component={Components.page.chart} />
-                    <Route path="firebase" component={Components.page.firebase} />
-                    <Route path="*" component={NotFound} />
+                <Route path="/" component={Containers.App}>
+                    <IndexRoute component={Containers.Base} />
+                    {/* <Route path="setting" component={Components.Setting} /> */}
+                    {/* <Route path="score" component={Components.Score} />
+                    <Route path="chart" component={Components.Chart} /> */}
+                    <Route path="firebase" component={Containers.FirebaseTest} />
                 </Route>
             </Router>
 
@@ -28,4 +25,8 @@ export default class Root extends Component {
 }
 
 /* <Route path="score" component={Components.page.AdminLeftList} />
-<Route path="chart" component={Components.page.AdminLeftList} /> */
+<Route path="chart" component={Components.page.AdminLeftList} />
+<Route path="*" component={NotFound} /> */
+/*
+
+*/

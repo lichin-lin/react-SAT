@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import Base from './../components/Base'
+import Components from 'js/components'
 
 const mapStateToProps = (state, ownProps) => ({
     ...ownProps
@@ -8,4 +8,4 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = (dispatch) => ({
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Base)
+export default connect(mapStateToProps, mapDispatchToProps)(Components.Base)

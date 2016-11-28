@@ -1,4 +1,7 @@
-import React, {Component} from 'react'
+import React, {Component, PropTypes} from 'react'
+import {
+    Grid
+} from 'react-bootstrap'
 // import {connect} from 'react-redux'
 // import {firebase, helpers} from 'redux-react-firebase'
 // import FacebookLogin from 'react-facebook-login'
@@ -6,6 +9,12 @@ import React, {Component} from 'react'
 // const {isLoaded, isEmpty, dataToJS} = helpers
 
 export default class extends Component {
+    static propTypes = {
+        FBLogin: PropTypes.func.isRequired,
+        getUserData: PropTypes.func.isRequired
+    };
+    static defaultProps = {
+    };
     constructor (props) {
         super(props)
         this.state = {
@@ -13,31 +22,54 @@ export default class extends Component {
         }
         console.log(this.state)
         this.FBLogin = this.FBLogin.bind(this)
+        this.getUserData = this.getUserData.bind(this)
+        this.getYearData = this.getYearData.bind(this)
         this.onFormSubmit = this.onFormSubmit.bind(this)
     }
     onFormSubmit (event) {
         event.preventDefault()
-        console.log(this.props.currentUser)
     }
     FBLogin () {
+        console.log(this.props)
         this.props.FBLogin()
+    }
+    getUserData () {
+        console.log('get user data...')
+        this.props.getUserData()
+    }
+    getYearData () {
+        console.log('get Year data...')
+        this.props.getYearData(97)
+    }
+    componentDidMount () {
+        console.log('====here====')
+        console.log(this.props)
     }
     render () {
         return (
         <div>
             <br/>
             <br/>
-            <h1>SAT table</h1>
-            <input type="text" ref="newlogin" />
-            <button onClick={this.props.FBLogin}>login</button>
-
-            <div className="col-md-6">
-                <form id="frmProfile" role="form" onSubmit={this.onFormSubmit}>
-                    <h2>Get User Profile</h2>
-                    <p>{this.state.message}</p>
-                    <p>{this.props.currentUser}</p>
-                    <button type="submit" className="btn btn-primary">Update</button>
-                </form>
+            <div>
+                <Grid>
+                    <br/>
+                    <br/>
+                    <div>
+                        <button className="btn btn-primary" onClick={this.FBLogin}>FBlogin</button>
+                        <button className="btn btn-primary" onClick={this.getUserData}>getUserData</button>
+                        <button className="btn btn-primary" onClick={this.getYearData}>getYearData</button>
+                        {/* <form id="frmProfile" role="form" onSubmit={this.onFormSubmit}>
+                            <h2>get User Profile</h2>
+                            <p>{this.state.message}</p>
+                            <div className="form-group">
+                                <label htmlFor="email">Email: </label>
+                                <input type="text" defaultValue={this.props.currentUser}
+                                 className="form-control" id="email" placeholder="Email" name="email"/>
+                            </div>
+                            <button type="submit" className="btn btn-primary">Update</button>
+                        </form> */}
+                    </div>
+                </Grid>
             </div>
         </div>
         )

@@ -1,18 +1,11 @@
 import firebase from 'firebase'
+// import ApiFetch from './Base'
+// import urlJoin from 'url-join'
 
 export default {
     FBLogin: function (data) {
-        console.log('login...', data)
         var provider = new firebase.auth.FacebookAuthProvider()
-        // return firebase.auth().signInWithPopup(provider)
-        return firebase.auth().signInWithPopup(provider).then(function (result) {
-            return firebase.auth().currentUser
-        }).catch(function (error) {
-            return {
-                errorCode: error.code,
-                errorMessage: error.message
-            }
-        })
+        return firebase.auth().signInWithPopup(provider)
     },
     FBLogout: function (data) {
         return firebase.auth().signOut()
@@ -20,12 +13,32 @@ export default {
     getUserData: function () {
         var userId = firebase.auth().currentUser.uid
         // let initData = ''
+        console.log(userId)
         return firebase.database().ref('/users/' + userId)
         // .on('value', function (snapshot) {
         //     initData = snapshot.val().init
         //     return initData
         // })
     },
+    getYearData: function (year) {
+        var promise = new Promise(function (resolve, reject) {
+            let a = 1
+            if (a === 1) {
+                resolve('Stuff worked!')
+                firebase.database().ref('/table/SAT' + (1911 + year)).on('value', function (snapshot) {
+                    return snapshot.val()
+                })
+            } else {
+                reject(Error('It broke'))
+            }
+        })
+        promise.then(function (result) {
+            console.log(result) // "Stuff worked!"
+        }, function (err) {
+            console.log(err) // Error: "It broke"
+        })
+    }
+    /*
     isUserLogin: function () {
         var user = firebase.auth().currentUser
         if (user) {
@@ -43,4 +56,5 @@ export default {
         // })
         return 0
     }
+    */
 }

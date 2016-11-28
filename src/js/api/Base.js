@@ -1,9 +1,5 @@
 import fetch from 'isomorphic-fetch'
-import urlJoin from 'url-join'
 import qs from 'query-string'
-
-const HOST = ''
-const VERSION = ''
 
 const combinePayload = (res: Promise, payload?: { [key: string]: any }) => {
     return Promise.resolve(
@@ -15,7 +11,7 @@ const combinePayload = (res: Promise, payload?: { [key: string]: any }) => {
 }
 
 export default (url: string, options?: { [key: string]: any }={}) => {
-    const URL = urlJoin(HOST, VERSION, url)
+    const URL = url
     let body = {}
     options.credentials = 'includes'
     if (options.method && options.method.toLowerCase() !== 'get') {
@@ -28,7 +24,7 @@ export default (url: string, options?: { [key: string]: any }={}) => {
 
     return fetch(URL, options).then((res) => {
         if (res.status >= 200 && res.status < 300) {
-            return combinePayload(res.json(), body)
+            return res.json()
         } else {
             return Promise.reject(combinePayload(res.json(), body))
         }

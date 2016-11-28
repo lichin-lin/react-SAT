@@ -1,32 +1,26 @@
 import React, { Component } from 'react'
-import DevTools from './../containers/DevTools'
-import Footer from './common/Footer'
-import Nav from './common/Nav'
+import Containers from 'js/containers'
+import Components from 'js/components'
+import CSSModules from 'react-css-modules'
 
-export default class App extends Component {
+export default CSSModules(class extends Component {
     componentDidMount () {
-        console.log(this.props)
     }
     render () {
         return (
-            <div>
-                <Nav />
-                { this.props.children }
-                <Footer />
-                <button onClick={this.props.FBLogin}>login</button>
-                <button onClick={this.props.FBLogout}>logout</button>
-                <button onClick={this.props.getUserData}>get user data</button>
-                {/* <div>
-                    { window.mapObject(this.props.scoreList, (score) => (
-                        <ul key={score.id}>
-                            <li>
-                                {score}
-                            </li>
-                        </ul>
-                    ))}
-                </div> */}
-                { process.env.NODE_ENV !== 'production' ? <DevTools/> : null }
+            <div className="app">
+                <Containers.common.Nav />
+                <div className="body margin-top">
+                    { this.props.children }
+                </div>
+                <Components.common.Footer />
+                <div>
+                    <button onClick={this.props.FBLogin}>login</button>
+                    <button onClick={this.props.FBLogout}>logout</button>
+                    <button onClick={this.props.getUserData}>get user data</button>
+                </div>
+                { process.env.NODE_ENV !== 'production' ? <Containers.DevTools/> : null }
             </div>
         )
     }
-}
+}, require('./App.styl'))

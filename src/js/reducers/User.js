@@ -6,6 +6,21 @@ export default handleActions({
 
     getUserData: {
         next (state, action) {
+            console.log(action)
+            return {
+                ...action.payload
+            }
+        },
+        throw (state, action) {
+            return {
+                ...state
+            }
+        }
+    },
+
+    getYearData: {
+        next (state, action) {
+            console.log(action.payload)
             return {
                 ...action.payload
             }

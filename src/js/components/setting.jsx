@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import {
-    Jumbotron,
     Button,
     Grid,
     Row,
@@ -12,20 +11,11 @@ export default class extends Component {
     render () {
         return (
         <div>
-            <Jumbotron>
-                <Grid>
-                <Row>
-                    <Col xs={12} md={12}>
-                      <h1>Hello, world!</h1>
-                      <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-                      <p><Button bsStyle="primary">Learn more</Button></p>
-                    </Col>
-                </Row>
-                </Grid>
-            </Jumbotron>
             <Grid>
               <Row>
               <Col xs={6} md={4}>
+                  <br/><br/><br/>
+                  <br/><br/><br/>
                 <Thumbnail src="/assets/thumbnaildiv.png" alt="242x200">
                   <h3>Thumbnail label</h3>
                   <p>Description</p>
