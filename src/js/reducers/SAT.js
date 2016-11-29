@@ -1,14 +1,18 @@
 import { handleActions } from 'redux-actions'
 
-const initialState = {}
+const initialState = {
+    MeasureScore: {},
+    StudentScore: {}
+}
 
 export default handleActions({
 
-    getUserData: {
+    getScoreData: {
         next (state, action) {
-            console.log(action)
+            console.log(action.payload)
             return {
-                ...action.payload
+                ...state,
+                StudentScore: action.payload
             }
         },
         throw (state, action) {
@@ -21,6 +25,20 @@ export default handleActions({
     getYearData: {
         next (state, action) {
             console.log(action.payload)
+            return {
+                ...state,
+                MeasureScore: action.payload
+            }
+        },
+        throw (state, action) {
+            return {
+                ...state
+            }
+        }
+    },
+
+    updateUserScore: {
+        next (state, action) {
             return {
                 ...action.payload
             }

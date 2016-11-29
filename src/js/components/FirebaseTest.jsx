@@ -1,6 +1,9 @@
 import React, {Component, PropTypes} from 'react'
 import {
-    Grid
+    Grid,
+    Row,
+    Col,
+    ListGroup
 } from 'react-bootstrap'
 // import {connect} from 'react-redux'
 // import {firebase, helpers} from 'redux-react-firebase'
@@ -11,7 +14,8 @@ import {
 export default class extends Component {
     static propTypes = {
         FBLogin: PropTypes.func.isRequired,
-        getUserData: PropTypes.func.isRequired
+        getUserData: PropTypes.func.isRequired,
+        currentUser: PropTypes.object.isRequired
     };
     static defaultProps = {
     };
@@ -45,7 +49,17 @@ export default class extends Component {
         console.log('====here====')
         console.log(this.props)
     }
+    componentWillMount () {
+        console.log('---- here ----')
+        this.props.FBLogin()
+        this.props.getYearData(97)
+        console.log(this.props)
+    }
     render () {
+        // current user data not load in.
+        if (Object.keys(this.props.currentUser).length === 0) {
+            return <h1>Not login yet, please login</h1>
+        }
         return (
         <div>
             <br/>
@@ -58,17 +72,18 @@ export default class extends Component {
                         <button className="btn btn-primary" onClick={this.FBLogin}>FBlogin</button>
                         <button className="btn btn-primary" onClick={this.getUserData}>getUserData</button>
                         <button className="btn btn-primary" onClick={this.getYearData}>getYearData</button>
-                        {/* <form id="frmProfile" role="form" onSubmit={this.onFormSubmit}>
-                            <h2>get User Profile</h2>
-                            <p>{this.state.message}</p>
-                            <div className="form-group">
-                                <label htmlFor="email">Email: </label>
-                                <input type="text" defaultValue={this.props.currentUser}
-                                 className="form-control" id="email" placeholder="Email" name="email"/>
-                            </div>
-                            <button type="submit" className="btn btn-primary">Update</button>
-                        </form> */}
                     </div>
+                    <Row>
+                        <Col md={12}>
+                            <ListGroup>
+                                {/* {window.mapObject(this.props.currentUser, (infomation) => (
+                                    <li key={infomation.id}>
+                                        { infomation }
+                                    </li>
+                                ))} */}
+                            </ListGroup>
+                        </Col>
+                    </Row>
                 </Grid>
             </div>
         </div>
@@ -117,14 +132,17 @@ export default class extends Component {
 // const responseFacebook = (response) => {
 //     console.log(response)
 // }
-
-// const fbLogin = () => {
-//     console.log('fb login...', firebase)
-//     firebase.login('facebook', function (error) {
-//         if (error) {
-//             console.log('Authentication Failed', error)
-//         } else {
-//             console.log('Authenticated successfully with payload:')
-//         }
-//     })
-// }
+/*
+<Row>
+    <Col md={12}>
+        <ListGroup>
+            { window.mapObject(this.props.currentUser.chniese, (problem) => (
+                <li key={problem.id}>
+                    {window.chr(window.ord('A') + problem.id - 1)} . {problem.title}
+                    { problem }
+                </li>
+            ))}
+        </ListGroup>
+    </Col>
+</Row>
+ */

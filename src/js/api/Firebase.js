@@ -10,32 +10,28 @@ export default {
     FBLogout: function (data) {
         return firebase.auth().signOut()
     },
-    getUserData: function () {
+    getScoreData: function (index) {
         var userId = firebase.auth().currentUser.uid
-        // let initData = ''
         console.log(userId)
-        return firebase.database().ref('/users/' + userId)
-        // .on('value', function (snapshot) {
-        //     initData = snapshot.val().init
-        //     return initData
-        // })
+        return firebase.database().ref('/users/' + userId + '/init/' + index).once('value').then(function (snapshot) {
+            return snapshot.val()
+        })
     },
     getYearData: function (year) {
-        var promise = new Promise(function (resolve, reject) {
-            let a = 1
-            if (a === 1) {
-                resolve('Stuff worked!')
-                firebase.database().ref('/table/SAT' + (1911 + year)).on('value', function (snapshot) {
-                    return snapshot.val()
-                })
-            } else {
-                reject(Error('It broke'))
-            }
+        // let data = '1'
+        return firebase.database().ref('/table/SAT' + (1911 + year)).once('value').then(function (snapshot) {
+            return snapshot.val()
         })
-        promise.then(function (result) {
-            console.log(result) // "Stuff worked!"
-        }, function (err) {
-            console.log(err) // Error: "It broke"
+    },
+    updateUserScore: function (path, index, data) {
+        var userId = firebase.auth().currentUser.uid
+        userId = 'qqq'
+        firebase.database().ref('users/' + userId + '/' + path + '/' + index).set({
+            Chinese: data.Chinese,
+            English: data.English,
+            Math: data.Math,
+            Society: data.Society,
+            Science: data.Science
         })
     }
     /*
@@ -47,14 +43,6 @@ export default {
             console.log('no current user')
         }
         return user
-    },
-    updateUserScore: function () {
-        var userId = firebase.auth().currentUser.uid
-        console.log(userId)
-        // firebase.database().ref('users/' + userId).set({
-        //     test: '2'
-        // })
-        return 0
-    }
-    */
+    },    */
+
 }

@@ -1,6 +1,6 @@
 import Session from './Session'
-import User from './User'
+import SAT from './SAT'
 export default {
     Session,
-    User
+    SAT
 }

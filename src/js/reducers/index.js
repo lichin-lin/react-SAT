@@ -3,12 +3,12 @@ import { routerReducer as routing } from 'react-router-redux'
 import { firebaseStateReducer } from 'redux-react-firebase'
 import base from './Base'
 import Session from './Session'
-import User from './User'
+import SAT from './SAT'
 
 export default combineReducers({
     base,
     Session,
-    User,
+    SAT,
     firebase: firebaseStateReducer,
     routing
 })

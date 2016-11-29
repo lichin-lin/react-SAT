@@ -4,7 +4,7 @@ import Base from './Base'
 import Chart from './chart'
 import FirebaseTest from './FirebaseTest'
 import NotFound from './NotFound'
-import Score from './score'
+import SAT from './SAT'
 import Setting from './setting'
 export default {
     common,
@@ -13,6 +13,6 @@ export default {
     Chart,
     FirebaseTest,
     NotFound,
-    Score,
+    SAT,
     Setting
 }

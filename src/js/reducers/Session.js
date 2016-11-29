@@ -7,7 +7,7 @@ export default handleActions({
     FBLogin: {
         next (state, action) {
             return {
-                ...state,
+                // ...state,
                 ...action.payload
             }
         },

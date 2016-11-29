@@ -14,11 +14,11 @@ export default CSSModules(class extends Component {
                     { this.props.children }
                 </div>
                 <Components.common.Footer />
-                <div>
+                {/* <div>
                     <button onClick={this.props.FBLogin}>login</button>
                     <button onClick={this.props.FBLogout}>logout</button>
                     <button onClick={this.props.getUserData}>get user data</button>
-                </div>
+                </div> */}
                 { process.env.NODE_ENV !== 'production' ? <Containers.DevTools/> : null }
             </div>
         )
