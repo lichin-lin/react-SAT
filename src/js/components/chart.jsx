@@ -197,7 +197,7 @@ export default CSSModules(class extends Component {
             return (
                 <div className="not_login">
                     <div className="not_login_title">
-                        <h1 className="not_login_logo">SAT.tw</h1>
+                        <h1 className="not_login_logo">SAT.me</h1>
                         <p>歷屆試題級分計算機</p>
                     </div>
                     <div className="not_login_section">
