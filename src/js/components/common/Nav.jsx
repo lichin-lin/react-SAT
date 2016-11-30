@@ -19,18 +19,18 @@ export default class extends Component {
             </Navbar.Header>
             <Navbar.Collapse>
                 <Nav>
-                    <LinkContainer to="/setting">
-                        <NavItem>setting</NavItem>
-                    </LinkContainer>
                     <LinkContainer to="/SAT">
-                        <NavItem>SAT</NavItem>
+                        <NavItem>score</NavItem>
                     </LinkContainer>
                     <LinkContainer to="/chart">
                         <NavItem>chart</NavItem>
                     </LinkContainer>
-                    <LinkContainer to="/firebase">
-                        <NavItem>firebase</NavItem>
+                    <LinkContainer to="/setting">
+                        <NavItem>setting</NavItem>
                     </LinkContainer>
+                    {/* <LinkContainer to="/firebase">
+                        <NavItem>firebase</NavItem>
+                    </LinkContainer> */}
                 </Nav>
             </Navbar.Collapse>
         </Navbar>

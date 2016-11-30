@@ -6,7 +6,7 @@ import {
     ControlLabel,
     FormControl
 } from 'react-bootstrap'
-require('./../../css/page/score.styl')
+require('./../../css/page/SAT.styl')
 export default class extends Component {
     static propTypes = {
         getScoreData: PropTypes.func.isRequired,
@@ -122,13 +122,20 @@ export default class extends Component {
         <div>
             <Grid>
                 <form role="form" onSubmit={this.onFormSubmit}>
-                    <h1>轉換級分 年份:{this.state.selectedYear}</h1>
+                    <h1>轉換級分 {this.state.selectedYear} 年</h1>
                     <FormGroup controlId="formControlsSelect">
                       <ControlLabel>選擇年份 choose year</ControlLabel>
                       <FormControl componentClass="select" placeholder="select" onChange={this.handleSelectChange}>
                         <option value="96">96</option>
                         <option value="97">97</option>
                         <option value="98">98</option>
+                        <option value="99">99</option>
+                        <option value="100">100</option>
+                        <option value="101">101</option>
+                        <option value="102">102</option>
+                        <option value="103">103</option>
+                        <option value="104">104</option>
+                        <option value="105">105</option>
                       </FormControl>
                     </FormGroup>
                     <FormGroup controlId="formControlsInput">
@@ -156,8 +163,9 @@ export default class extends Component {
                       <FormControl type="text" placeholder="原始分數" value={this.state.scoreResult} disabled>
                       </FormControl>
                     </FormGroup>
-                    <button type="submit" className="btn btn-primary">轉換並儲存</button>
+                    <button type="submit" className="btn btn-primary sat_btn">轉換並儲存</button>
                 </form>
+                <br/><br/>
             </Grid>
         </div>
         )

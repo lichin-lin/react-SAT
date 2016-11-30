@@ -23,10 +23,3 @@ export default class Root extends Component {
         )
     }
 }
-
-/* <Route path="score" component={Components.page.AdminLeftList} />
-<Route path="chart" component={Components.page.AdminLeftList} />
-<Route path="*" component={NotFound} /> */
-/*
-
-*/

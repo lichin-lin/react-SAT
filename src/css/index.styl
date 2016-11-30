@@ -1,8 +1,41 @@
-// @import "./css/variable.styl"
+@import url(http://fonts.googleapis.com/earlyaccess/notosanstc.css)
 @import url('https://fonts.googleapis.com/css?family=Open+Sans')
-
-$blue = #D8EAF9
 $black = #50514F
+$blue = #D8EAF9
+$white = #E0E0E0
+$fb_color = rgba(#3b5998, 0.8)
+$bg-color= #ff8888 //start color
+$stops= 100 //smoothness
+$time= 20s //duration of animation
+$hue-range= 20 //of 360deg
+animation_bg()
+  background: linear-gradient(230deg,#6a67ce, #6a67ce, #6a67ce, #fc636b, #ffb900, #53d769, #53d769, #53d769) //, #ffdd00
+  background-size: 1000% 1000%
+
+  -webkit-animation: AnimationName 30s ease infinite;
+  -moz-animation: AnimationName 30s ease infinite;
+  animation: AnimationName 30s ease infinite;
+
+  @-webkit-keyframes AnimationName {
+      0%{background-position:0% 2.5%}
+      50%{background-position:100% 97.5%}
+      100%{background-position:0% 2.5%}
+  }
+  @-moz-keyframes AnimationName {
+      0%{background-position:0% 2.5%}
+      50%{background-position:100% 97.5%}
+      100%{background-position:0% 2.5%}
+  }
+  @keyframes AnimationName {
+      0%{background-position:0% 2.5%}
+      50%{background-position:100% 97.5%}
+      100%{background-position:0% 2.5%}
+  }
+
+*
+  font-family 'Noto Sans TC', sans-serif
+h1.not_login_logo
+  color white !important
 body
     margin 0px
     background-color $blue
@@ -32,3 +65,64 @@ body
         color $black
         border 2px solid $black
         border-radius 2.5px
+
+h1
+  color $black
+  font-weight 400
+  font-size 3em !important
+
+h2
+  color $black
+  font-weight 400
+  font-size 2.5em !important
+  position relative
+  padding-bottom 20px
+  &:after
+    content ""
+    width 50px
+    height 5px
+    background-color $black
+    border-radius 1px
+    position absolute
+    bottom 10px
+    left 0
+
+.sat_btn
+  color $black
+  font-size 1.25em
+  font-weight 400
+  border 2px solid rgba(80,80,80, 0.75)
+  border-radius 2.5px
+  padding 5px 10px
+  margin 10px 10px 0 0
+  background transparent
+
+.fb_btn
+  color $fb_color
+  border-color $fb_color
+
+.not_login
+  width 100vw
+  height 100vh
+  animation_bg()
+  position absolute
+  top 0
+  left 0
+  z-index 9999
+  display flex
+  flex-direction column
+  justify-content center
+  align-items center
+  .not_login_title
+    position absolute
+    bottom 10px
+    left auto
+    right auto
+    color $white !important
+  .not_login_section
+    max-width 480px
+    text-align center
+    position relative
+    p
+      color $white
+      font-size 1.5em

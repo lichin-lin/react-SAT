@@ -9,7 +9,8 @@ import {
     Row,
     Col
 } from 'react-bootstrap'
-export default class extends Component {
+import CSSModules from 'react-css-modules'
+export default CSSModules(class extends Component {
     static propTypes = {
         FBLogin: PropTypes.func.isRequired,
         getYearData: PropTypes.func.isRequired,
@@ -20,6 +21,7 @@ export default class extends Component {
     constructor (props) {
         super(props)
         this.state = {
+            fakeNum: 50,
             totalChartData: {
                 labels: ['96', '97', '98', '99', '100', '101', '102', '103', '104', '105'],
                 datasets: [
@@ -31,7 +33,8 @@ export default class extends Component {
                         pointStrokeColor: '#fff',
                         pointHighlightFill: '#fff',
                         pointHighlightStroke: 'rgba(220,220,220,1)',
-                        data: [65, 59, 70, 60, 0, 50, 55, 65, 67, 71]
+                        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
                     }
                 ]
             },
@@ -47,7 +50,7 @@ export default class extends Component {
                         pointStrokeColor: '#fff',
                         pointHighlightFill: '#fff',
                         pointHighlightStroke: 'rgba(220,220,220,1)',
-                        data: [4, 10, 10, 10, 7, 10, 10, 9, 6, 12]
+                        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
                     },
                     {
                         label: 'English',
@@ -58,7 +61,7 @@ export default class extends Component {
                         pointStrokeColor: '#fff',
                         pointHighlightFill: '#fff',
                         pointHighlightStroke: 'rgba(220,220,220,1)',
-                        data: [10, 4, 10, 10, 10, 8, 10, 12, 10, 8]
+                        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
                     },
                     {
                         label: 'Math',
@@ -69,7 +72,7 @@ export default class extends Component {
                         pointStrokeColor: '#fff',
                         pointHighlightFill: '#fff',
                         pointHighlightStroke: 'rgba(220,220,220,1)',
-                        data: [5, 1, 6, 6, 10, 10, 10, 12, 10, 4]
+                        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
                     },
                     {
                         label: 'Society',
@@ -80,7 +83,7 @@ export default class extends Component {
                         pointStrokeColor: '#fff',
                         pointHighlightFill: '#fff',
                         pointHighlightStroke: 'rgba(220,220,220,1)',
-                        data: [10, 4, 6, 10, 10, 12, 10, 12, 10, 2]
+                        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
                     },
                     {
                         label: 'Science',
@@ -91,7 +94,7 @@ export default class extends Component {
                         pointStrokeColor: '#fff',
                         pointHighlightFill: '#fff',
                         pointHighlightStroke: 'rgba(220,220,220,1)',
-                        data: [10, 4, 6, 10, 10, 12, 10, 12, 10, 12]
+                        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
                     }
                 ]
             },
@@ -107,8 +110,8 @@ export default class extends Component {
                 maintainAspectRatio: true,
                 bezierCurveTension: 0.25,
                 scaleOverride: true,
-                scaleSteps: 5,
-                scaleStepWidth: 15,
+                // scaleSteps: 5,
+                // scaleStepWidth: 15,
                 scaleStartValue: 0,
                 legendTemplate: '<ul class=\'<%=name.toLowerCase()%>-legend\'><% for (var i=0; i<datasets.length; i++){%><li><span style=\'background-color:<%=datasets[i].strokeColor%>\'><%if(datasets[i].label){%><%=datasets[i].label%><%}%>級分</span></li><%}%></ul>'
             },
@@ -140,6 +143,7 @@ export default class extends Component {
                 singleDataArray[i][j] = 0
             }
         }
+        console.log(singleDataArray)
         // init total data
         for (let i = 0; i < 10; i++) {
             totalDataArray[i] = 0
@@ -151,12 +155,14 @@ export default class extends Component {
             var mappingIndex = parseInt(key.slice(3)) - 2007
             let subjectCount = 0
             for (var subject in chartDataObj[key]) {
+                console.log('index: ', mappingIndex, ', sub: ', subjectCount, 'score: ', chartDataObj[key][subject])
                 yearTotalScore += chartDataObj[key][subject]
                 singleDataArray[subjectCount][mappingIndex] = chartDataObj[key][subject]
                 subjectCount += 1
             }
             totalDataArray[mappingIndex] = yearTotalScore
         }
+        console.log(totalDataArray)
         // put total data back to state.
         let newArray = _.extend({}, this.state.totalChartData)
         newArray.datasets[0].data = totalDataArray
@@ -178,54 +184,59 @@ export default class extends Component {
         this.props.FBLogin()
     }
     getUserTotalYearData () {
+        console.log(this.state)
         this.props.getUserTotalYearData()
     }
     componentWillMount () {
         this.props.isUserLogin()
+        // this.props.getUserTotalYearData()
         console.log('init,  ', this.props.currentUser.isLogin)
     }
     render () {
-        // if (this.props.currentUser.isLogin === 0) {
-        //     return (
-        //         <Grid>
-        //             <Row>
-        //                 <Col><h1>Not login yet, please login</h1></Col>
-        //             </Row>
-        //             <Row>
-        //                 <Col><button onClick={this.FBLogin}>login</button></Col>
-        //             </Row>
-        //         </Grid>
-        //     )
-        // }
+        if (this.props.currentUser.isLogin === 0) {
+            return (
+                <div className="not_login">
+                    <div className="not_login_title">
+                        <h1 className="not_login_logo">SAT.tw</h1>
+                        <p>歷屆試題級分計算機</p>
+                    </div>
+                    <div className="not_login_section">
+                        <p>已有 {this.state.fakeNum} 位考生使用</p>
+                        <p>一起加入奮鬥的行列吧！</p>
+                        <button className="sat_btn fb_btn" onClick={this.FBLogin}>以 facebook 登入</button>
+                    </div>
+                </div>
+            )
+        }
         return (
         <div>
             <Grid>
                 <Row>
-                    <Col>
-                        {/* <h1>{this.props.currentUser.AuthData.user.displayName}</h1> */}
+                    <Col xs={12} md={12}>
+                        <h1>你好,{this.props.currentUser.AuthData.user.displayName}</h1>
                     </Col>
                 </Row>
                 <Row>
-                    <Col>
-                        <button onClick={this.getUserTotalYearData}>取得歷年資料</button>
-                        <button onClick={this.changedata}>更新歷年資料</button>
+                    <Col xs={12} md={12}>
+                        <button className="sat_btn" onClick={this.getUserTotalYearData}>取得歷年資料</button>
+                        <button className="sat_btn" onClick={this.changedata}>更新歷年資料</button>
                     </Col>
                 </Row>
-              <Row>
-              <Col xs={12} md={12}>
-                  <h2>總覽</h2>
-                  <Line data={this.state.totalChartData} options={this.state.chartOptions} redraw={true} width="600" height="400"/>
-              </Col>
-              <Col xs={12} md={12}>
-                  <h2>單科</h2>
-                  <Line data={this.state.singleChartData} options={this.state.singleChartOptions} redraw={true} width="600" height="400"/>
-              </Col>
-              </Row>
+                <Row>
+                    <Col xs={12} md={12}>
+                        <h2>總覽</h2>
+                        <Line data={this.state.totalChartData} options={this.state.chartOptions} redraw={true} width={600} height={400}/>
+                    </Col>
+                    <Col xs={12} md={12}>
+                        <h2>單科</h2>
+                        <Line data={this.state.singleChartData} options={this.state.singleChartOptions} redraw={false} width={600} height={400}/>
+                    </Col>
+                </Row>
             </Grid>
         </div>
         )
     }
-}
+}, require('./chart.styl'))
 
 // icon , name
 // chart, with total score
