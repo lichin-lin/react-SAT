@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import _ from 'lodash'
 import {
     Line
-} from 'react-chartjs'
+} from 'react-chartjs-2'
 import {
     // Button,
     Grid,
@@ -24,9 +24,9 @@ export default class extends Component {
                 labels: ['96', '97', '98', '99', '100', '101', '102', '103', '104', '105'],
                 datasets: [
                     {
-                        label: 'SAT score every year / 年份對照',
-                        fillColor: 'rgba(164,211,250,0.25)',
-                        strokeColor: 'rgba(164,211,250,1)',
+                        borderWidth: 2,
+                        backgroundColor: 'rgba(164,211,250,0.25)',
+                        borderColor: 'rgba(164,211,250,1)',
                         pointColor: 'rgba(164,211,250,1)',
                         pointStrokeColor: '#fff',
                         pointHighlightFill: '#fff',
@@ -40,8 +40,9 @@ export default class extends Component {
                 datasets: [
                     {
                         label: 'Chinese',
-                        fillColor: 'rgba(255,90,100,0.05)',
-                        strokeColor: 'rgba(255,90,100,1)',
+                        borderWidth: 2,
+                        backgroundColor: 'rgba(255,90,100,0.05)',
+                        borderColor: 'rgba(255,90,100,1)',
                         pointColor: 'rgba(255,90,100,1)',
                         pointStrokeColor: '#fff',
                         pointHighlightFill: '#fff',
@@ -50,8 +51,9 @@ export default class extends Component {
                     },
                     {
                         label: 'English',
-                        fillColor: 'rgba(46,135,170,0.05)',
-                        strokeColor: 'rgba(46,135,170,1)',
+                        borderWidth: 2,
+                        backgroundColor: 'rgba(46,135,170,0.05)',
+                        borderColor: 'rgba(46,135,170,1)',
                         pointColor: 'rgba(46,135,170,1)',
                         pointStrokeColor: '#fff',
                         pointHighlightFill: '#fff',
@@ -60,8 +62,9 @@ export default class extends Component {
                     },
                     {
                         label: 'Math',
-                        fillColor: 'rgba(245,210,95,0.05)',
-                        strokeColor: 'rgba(245,210,95,1)',
+                        borderWidth: 2,
+                        backgroundColor: 'rgba(245,210,95,0.05)',
+                        borderColor: 'rgba(245,210,95,1)',
                         pointColor: 'rgba(245,210,95,1)',
                         pointStrokeColor: '#fff',
                         pointHighlightFill: '#fff',
@@ -70,8 +73,9 @@ export default class extends Component {
                     },
                     {
                         label: 'Society',
-                        fillColor: 'rgba(105,150,90,0.05)',
-                        strokeColor: 'rgba(105,150,90,1)',
+                        borderWidth: 2,
+                        backgroundColor: 'rgba(105,150,90,0.05)',
+                        borderColor: 'rgba(105,150,90,1)',
                         pointColor: 'rgba(105,150,90,1)',
                         pointStrokeColor: '#fff',
                         pointHighlightFill: '#fff',
@@ -80,8 +84,9 @@ export default class extends Component {
                     },
                     {
                         label: 'Science',
-                        fillColor: 'rgba(80,80,80,0.05)',
-                        strokeColor: 'rgba(80,80,80,1)',
+                        borderWidth: 2,
+                        backgroundColor: 'rgba(80,80,80,0.05)',
+                        borderColor: 'rgba(80,80,80,1)',
                         pointColor: 'rgba(80,80,80,1)',
                         pointStrokeColor: '#fff',
                         pointHighlightFill: '#fff',
@@ -91,6 +96,13 @@ export default class extends Component {
                 ]
             },
             chartOptions: {
+                title: {
+                    display: false,
+                    text: 'SAT score every year / 年份對照'
+                },
+                legend: {
+                    display: false
+                },
                 responsive: true,
                 maintainAspectRatio: true,
                 bezierCurveTension: 0.25,
@@ -128,7 +140,6 @@ export default class extends Component {
                 singleDataArray[i][j] = 0
             }
         }
-        console.log(singleDataArray)
         // init total data
         for (let i = 0; i < 10; i++) {
             totalDataArray[i] = 0
@@ -140,7 +151,6 @@ export default class extends Component {
             var mappingIndex = parseInt(key.slice(3)) - 2007
             let subjectCount = 0
             for (var subject in chartDataObj[key]) {
-                console.log('index: ', mappingIndex, ', sub: ', subjectCount, 'score: ', chartDataObj[key][subject])
                 yearTotalScore += chartDataObj[key][subject]
                 singleDataArray[subjectCount][mappingIndex] = chartDataObj[key][subject]
                 subjectCount += 1
@@ -204,11 +214,11 @@ export default class extends Component {
               <Row>
               <Col xs={12} md={12}>
                   <h2>總覽</h2>
-                  <Line data={this.state.totalChartData} options={this.state.chartOptions} redraw={true} width="600" height="300"/>
+                  <Line data={this.state.totalChartData} options={this.state.chartOptions} redraw={true} width="600" height="400"/>
               </Col>
               <Col xs={12} md={12}>
                   <h2>單科</h2>
-                  <Line data={this.state.singleChartData} options={this.state.singleChartOptions} redraw={true} width="600" height="300"/>
+                  <Line data={this.state.singleChartData} options={this.state.singleChartOptions} redraw={true} width="600" height="400"/>
               </Col>
               </Row>
             </Grid>
