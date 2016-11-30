@@ -1,7 +1,6 @@
 import { handleActions } from 'redux-actions'
 
 const initialState = {
-    isLogin: {},
     AuthData: {}
 }
 
@@ -16,7 +15,7 @@ export default handleActions({
         },
         throw (state, action) {
             return {
-                ...state
+                AuthData: {}
             }
         }
     },

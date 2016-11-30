@@ -12,15 +12,14 @@ export default {
     },
     getScoreData: function (index) {
         var userId = firebase.auth().currentUser.uid
-        console.log(userId)
-        userId = 'qqq'
+        console.log('in api, get score', userId, index)
         return firebase.database().ref('/users/' + userId + '/init/' + index).once('value').then(function (snapshot) {
             return snapshot.val()
         })
     },
-    getYearData: function (year) {
+    getYearData: function (index) {
         // let data = '1'
-        return firebase.database().ref('/table/SAT' + (1911 + year)).once('value').then(function (snapshot) {
+        return firebase.database().ref('/table/' + index).once('value').then(function (snapshot) {
             return snapshot.val()
         })
     },
@@ -33,7 +32,6 @@ export default {
     },
     updateUserScore: function (path, index, data) {
         var userId = firebase.auth().currentUser.uid
-        userId = 'qqq'
         firebase.database().ref('users/' + userId + '/' + path + '/' + index).set({
             Chinese: data.Chinese,
             English: data.English,
@@ -46,10 +44,10 @@ export default {
         var user = firebase.auth().currentUser
         console.log('user:', user)
         if (user) {
-            console.log('current user: ', user)
+            console.log('From firebase api: current user: ', user)
             return user
         } else {
-            console.log('no current user')
+            console.log('From firebase api: no current user')
             return 0
         }
     }

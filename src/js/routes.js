@@ -7,17 +7,24 @@ const history = syncHistoryWithStore(browserHistory, store)
 // import Components from 'js/components'
 import Containers from 'js/containers'
 
+const checkLogin = (next) => {
+    if (Object.keys(store.getState().Session.AuthData).length === 0) {
+        location.href = '/login/'
+    }
+}
+
 export default class Root extends Component {
     render () {
         return (
             <Router history={history}>
-                <Route path="/" component={Containers.App}>
+                <Route path="/" component={Containers.App} onEnter={checkLogin} >
                     <IndexRoute component={Containers.Base} />
                     {/* <Route path="setting" component={Components.Setting} /> */}
                     <Route path="SAT" component={Containers.SAT} />
                     <Route path="chart" component={Containers.Chart} />
                     {/* <Route path="firebase" component={Containers.FirebaseTest} /> */}
                 </Route>
+                <Route path="/login/" component={Containers.Login} />
             </Router>
 
         )

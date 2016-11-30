@@ -4,7 +4,6 @@ import {
     Line
 } from 'react-chartjs-2'
 import {
-    // Button,
     Grid,
     Row,
     Col
@@ -21,6 +20,7 @@ export default CSSModules(class extends Component {
     constructor (props) {
         super(props)
         this.state = {
+            counter: 0,
             fakeNum: 50,
             totalChartData: {
                 labels: ['96', '97', '98', '99', '100', '101', '102', '103', '104', '105'],
@@ -61,7 +61,7 @@ export default CSSModules(class extends Component {
                         pointStrokeColor: '#fff',
                         pointHighlightFill: '#fff',
                         pointHighlightStroke: 'rgba(220,220,220,1)',
-                        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+                        data: [10, 0, 0, 0, 0, 0, 0, 0, 0, 0]
                     },
                     {
                         label: 'Math',
@@ -105,30 +105,27 @@ export default CSSModules(class extends Component {
                 },
                 legend: {
                     display: false
-                },
-                responsive: true,
-                maintainAspectRatio: true,
-                bezierCurveTension: 0.25,
-                scaleOverride: true,
-                // scaleSteps: 5,
-                // scaleStepWidth: 15,
-                scaleStartValue: 0,
-                legendTemplate: '<ul class=\'<%=name.toLowerCase()%>-legend\'><% for (var i=0; i<datasets.length; i++){%><li><span style=\'background-color:<%=datasets[i].strokeColor%>\'><%if(datasets[i].label){%><%=datasets[i].label%><%}%>級分</span></li><%}%></ul>'
+                }
+                // responsive: true,
+                // maintainAspectRatio: true,
+                // bezierCurveTension: 0.25,
+                // scaleOverride: true,
+                // // scaleSteps: 5,
+                // // scaleStepWidth: 15,
+                // scaleStartValue: 0,
+                // legendTemplate: '<ul class=\'<%=name.toLowerCase()%>-legend\'><% for (var i=0; i<datasets.length; i++){%><li><span style=\'background-color:<%=datasets[i].strokeColor%>\'><%if(datasets[i].label){%><%=datasets[i].label%><%}%>級分</span></li><%}%></ul>'
             },
             singleChartOptions: {
-                responsive: true,
-                maintainAspectRatio: true,
-                bezierCurveTension: 0.25,
-                scaleOverride: true,
-                scaleSteps: 15,
-                scaleStepWidth: 1,
-                scaleStartValue: 0,
-                legendTemplate: '<ul class=\'<%=name.toLowerCase()%>-legend\'><% for (var i=0; i<datasets.length; i++){%><li><span style=\'background-color:<%=datasets[i].strokeColor%>\'><%if(datasets[i].label){%><%=datasets[i].label%><%}%>級分</span></li><%}%></ul>'
+                // responsive: true,
+                // maintainAspectRatio: true,
+                // bezierCurveTension: 0.25,
+                // scaleOverride: true,
+                // scaleSteps: 15,
+                // scaleStepWidth: 1,
+                // scaleStartValue: 0,
+                // legendTemplate: '<ul class=\'<%=name.toLowerCase()%>-legend\'><% for (var i=0; i<datasets.length; i++){%><li><span style=\'background-color:<%=datasets[i].strokeColor%>\'><%if(datasets[i].label){%><%=datasets[i].label%><%}%>級分</span></li><%}%></ul>'
             }
         }
-        // this.printResult = this.printResult.bind(this)
-        this.FBLogin = this.FBLogin.bind(this)
-        this.isUserLogin = this.isUserLogin.bind(this)
         this.changedata = this.changedata.bind(this)
         this.getUserTotalYearData = this.getUserTotalYearData.bind(this)
     }
@@ -143,7 +140,7 @@ export default CSSModules(class extends Component {
                 singleDataArray[i][j] = 0
             }
         }
-        console.log(singleDataArray)
+
         // init total data
         for (let i = 0; i < 10; i++) {
             totalDataArray[i] = 0
@@ -162,78 +159,53 @@ export default CSSModules(class extends Component {
             }
             totalDataArray[mappingIndex] = yearTotalScore
         }
-        console.log(totalDataArray)
+
         // put total data back to state.
         let newArray = _.extend({}, this.state.totalChartData)
         newArray.datasets[0].data = totalDataArray
-        this.setState({datasets: newArray})
+        this.setState({totalChartData: newArray})
 
         // put single data back to state.
         for (let i = 0; i < 5; i++) {
             let newArray = _.extend({}, this.state.singleChartData)
             newArray.datasets[i].data = singleDataArray[i]
-            this.setState({datasets: newArray})
+            this.setState({singleChartData: newArray})
         }
+        this.setState({counter: this.state.counter + 1})
     }
 
-    isUserLogin () {
-        this.props.isUserLogin()
-    }
-
-    FBLogin () {
-        this.props.FBLogin()
-    }
     getUserTotalYearData () {
-        console.log(this.state)
         this.props.getUserTotalYearData()
     }
-    componentWillMount () {
-        this.props.isUserLogin()
-        // this.props.getUserTotalYearData()
-        console.log('init,  ', this.props.currentUser.isLogin)
-    }
+
     render () {
-        if (this.props.currentUser.isLogin === 0) {
-            return (
-                <div className="not_login">
-                    <div className="not_login_title">
-                        <h1 className="not_login_logo">SAT.me</h1>
-                        <p>歷屆試題級分計算機</p>
-                    </div>
-                    <div className="not_login_section">
-                        <p>已有 {this.state.fakeNum} 位考生使用</p>
-                        <p>一起加入奮鬥的行列吧！</p>
-                        <button className="sat_btn fb_btn" onClick={this.FBLogin}>以 facebook 登入</button>
-                    </div>
-                </div>
-            )
-        }
+        console.log('render', this.state)
         return (
-        <div>
-            <Grid>
-                <Row>
-                    <Col xs={12} md={12}>
-                        <h1>你好,{this.props.currentUser.AuthData.user.displayName}</h1>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col xs={12} md={12}>
-                        <button className="sat_btn" onClick={this.getUserTotalYearData}>取得歷年資料</button>
-                        <button className="sat_btn" onClick={this.changedata}>更新歷年資料</button>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col xs={12} md={12}>
-                        <h2>總覽</h2>
-                        <Line data={this.state.totalChartData} options={this.state.chartOptions} redraw={true} width={600} height={400}/>
-                    </Col>
-                    <Col xs={12} md={12}>
-                        <h2>單科</h2>
-                        <Line data={this.state.singleChartData} options={this.state.singleChartOptions} redraw={false} width={600} height={400}/>
-                    </Col>
-                </Row>
-            </Grid>
-        </div>
+            <div>
+                <Grid>
+                    <Row>
+                        <Col xs={12} md={12}>
+                            <h1>你好,{this.props.currentUser.AuthData.user.displayName}</h1>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col xs={12} md={12}>
+                            <button className="sat_btn" onClick={this.getUserTotalYearData}>取得歷年資料</button>
+                            <button className="sat_btn" onClick={this.changedata}>更新歷年資料</button>
+                        </Col>
+                    </Row>
+                    <Row key={this.state.counter}>
+                        <Col xs={12} md={12}>
+                            <h2>總覽</h2>
+                            <Line data={this.state.totalChartData} options={this.state.chartOptions} width={600} height={400}/>
+                        </Col>
+                        <Col xs={12} md={12}>
+                            <h2>單科</h2>
+                            <Line data={this.state.singleChartData} options={this.state.singleChartOptions} width={600} height={400}/>
+                        </Col>
+                    </Row>
+                </Grid>
+            </div>
         )
     }
 }, require('./chart.styl'))

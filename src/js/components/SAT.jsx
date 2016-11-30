@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import reactDOM from 'react-dom'
+// import reactDOM from 'react-dom'
 import {
     Grid,
     FormGroup,
@@ -22,11 +22,11 @@ export default class extends Component {
             message: '',
             selectedYear: 96,
             scoreResult: '',
-            chinese: 0,
-            english: 0,
-            math: 0,
-            social: 0,
-            sience: 0
+            Chinese: 0,
+            English: 0,
+            Math: 0,
+            Social: 0,
+            Science: 0
         }
         this.printResult = this.printResult.bind(this)
         this.onFormSubmit = this.onFormSubmit.bind(this)
@@ -39,11 +39,11 @@ export default class extends Component {
         var mappingValue = [15, 15, 15, 15, 15]
         var OriYear = 'SAT' + (1911 + parseInt(this.state.selectedYear))
         var OriData = {
-            Chinese: parseInt(reactDOM.findDOMNode(this.refs.Chinese).value),
-            English: parseInt(reactDOM.findDOMNode(this.refs.English).value),
-            Math: parseInt(reactDOM.findDOMNode(this.refs.Math).value),
-            Society: parseInt(reactDOM.findDOMNode(this.refs.Society).value),
-            Science: parseInt(reactDOM.findDOMNode(this.refs.Science).value)
+            Chinese: parseInt(this.state.Chinese), // parseInt(reactDOM.findDOMNode(this.refs.Chinese).value),
+            English: parseInt(this.state.English), // parseInt(reactDOM.findDOMNode(this.refs.English).value),
+            Math: parseInt(this.state.Math),       // parseInt(reactDOM.findDOMNode(this.refs.Math).value),
+            Society: parseInt(this.state.Social),  // parseInt(reactDOM.findDOMNode(this.refs.Society).value),
+            Science: parseInt(this.state.Science) // parseInt(reactDOM.findDOMNode(this.refs.Science).value)
         }
         this.props.updateUserScore('init', OriYear, OriData)
 
@@ -55,11 +55,13 @@ export default class extends Component {
             if (!OriData.hasOwnProperty(key)) continue
             // get Original score, then do transfer.
             var score = OriData[key]
-            var compareList = this.props.userData[mappingTable[mIndex]]
+            console.log(this.props)
+            var compareList = this.props.userData.MeasureScore[mappingTable[mIndex]]
 
             if (score === 0) {
                 mappingValue[mIndex] = 0
             } else {
+                console.log('here=======', compareList)
                 for (let k = 0; k <= 15; k++) {
                     if (score < compareList[k]) {
                         mappingValue[mIndex] = k
@@ -92,10 +94,10 @@ export default class extends Component {
     }
 
     handleSelectChange (event) {
-        this.setState({selectedYear: event.target.value})
-        this.props.getYearData(this.state.selectedYear)
-        var yearIndex = 'SAT' + (1911 + parseInt(this.state.selectedYear))
-        console.log('here wrong', yearIndex)
+        var selectedYear = event.target.value
+        this.setState({selectedYear: selectedYear})
+        var yearIndex = 'SAT' + (1911 + parseInt(selectedYear))
+        this.props.getYearData(yearIndex)
         this.props.getScoreData(yearIndex)
     }
 
@@ -106,6 +108,7 @@ export default class extends Component {
     }
 
     componentWillReceiveProps (nextProps) {
+        console.log('receive', nextProps)
         this.setState({
             ...nextProps.userData.StudentScore
         })
@@ -140,23 +143,23 @@ export default class extends Component {
                     </FormGroup>
                     <FormGroup controlId="formControlsInput">
                       <ControlLabel>國文 Chinese</ControlLabel>
-                      <FormControl type="number" placeholder="0" name="chinese" value={this.state.chinese || ''} onChange={this.handleInputChange} />
+                      <FormControl type="number" placeholder="0" name="Chinese" value={this.state.Chinese || 0} onChange={this.handleInputChange} />
                     </FormGroup>
                     <FormGroup controlId="formControlsInput">
                       <ControlLabel>英文 English</ControlLabel>
-                      <FormControl type="number" placeholder="0" name="english" value={this.state.english || ''} onChange={this.handleInputChange} />
+                      <FormControl type="number" placeholder="0" name="English" value={this.state.English || 0} onChange={this.handleInputChange} />
                     </FormGroup>
                     <FormGroup controlId="formControlsInput">
                       <ControlLabel>數學 Math</ControlLabel>
-                      <FormControl type="number" placeholder="0" name="math" value={this.state.math || ''} onChange={this.handleInputChange} />
+                      <FormControl type="number" placeholder="0" name="Math" value={this.state.Math || 0} onChange={this.handleInputChange} />
                     </FormGroup>
                     <FormGroup controlId="formControlsInput">
                       <ControlLabel>社會 Society</ControlLabel>
-                      <FormControl type="number" placeholder="0" name="social" value={this.state.social || ''} onChange={this.handleInputChange} />
+                      <FormControl type="number" placeholder="0" name="Social" value={this.state.Social || 0} onChange={this.handleInputChange} />
                     </FormGroup>
                     <FormGroup controlId="formControlsInput">
                       <ControlLabel>自然 Science</ControlLabel>
-                      <FormControl type="number" placeholder="0" name="science" value={this.state.science || ''} onChange={this.handleInputChange} />
+                      <FormControl type="number" placeholder="0" name="Science" value={this.state.Science || 0} onChange={this.handleInputChange} />
                     </FormGroup>
                     <FormGroup controlId="formControlsInput">
                       <ControlLabel>轉換結果</ControlLabel>

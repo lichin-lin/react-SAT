@@ -10,7 +10,7 @@ export default handleActions({
 
     getScoreData: {
         next (state, action) {
-            console.log(action.payload)
+            console.log('get score', action.payload)
             return {
                 ...state,
                 StudentScore: action.payload
@@ -25,7 +25,7 @@ export default handleActions({
 
     getYearData: {
         next (state, action) {
-            console.log(action.payload)
+            console.log('get year', action.payload)
             return {
                 ...state,
                 MeasureScore: action.payload
@@ -56,6 +56,7 @@ export default handleActions({
     updateUserScore: {
         next (state, action) {
             return {
+                ...state,
                 ...action.payload
             }
         },
