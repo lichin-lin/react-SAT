@@ -41,16 +41,16 @@ export default {
             Society: data.Society,
             Science: data.Science
         })
-    }
-    /*
+    },
     isUserLogin: function () {
         var user = firebase.auth().currentUser
+        console.log('user:', user)
         if (user) {
             console.log('current user: ', user)
+            return user
         } else {
             console.log('no current user')
+            return 0
         }
-        return user
-    },    */
-
+    }
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Containers from 'js/containers'
-import Components from 'js/components'
+// import Components from 'js/components'
 import CSSModules from 'react-css-modules'
 
 export default CSSModules(class extends Component {
@@ -13,7 +13,7 @@ export default CSSModules(class extends Component {
                 <div className="body margin-top">
                     { this.props.children }
                 </div>
-                <Components.common.Footer />
+                {/* <Components.common.Footer /> */}
                 {/* <div>
                     <button onClick={this.props.FBLogin}>login</button>
                     <button onClick={this.props.FBLogout}>logout</button>

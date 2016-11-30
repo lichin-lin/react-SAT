@@ -1,14 +1,17 @@
 import { handleActions } from 'redux-actions'
 
-const initialState = {}
+const initialState = {
+    isLogin: {},
+    AuthData: {}
+}
 
 export default handleActions({
 
     FBLogin: {
         next (state, action) {
             return {
-                // ...state,
-                ...action.payload
+                ...state,
+                AuthData: action.payload
             }
         },
         throw (state, action) {
@@ -21,7 +24,22 @@ export default handleActions({
     FBLogout: {
         next (state, action) {
             return {
-                ...action.payload
+                ...state,
+                AuthData: action.payload
+            }
+        },
+        throw (state, action) {
+            return {
+                ...state
+            }
+        }
+    },
+
+    isUserLogin: {
+        next (state, action) {
+            return {
+                ...state,
+                isLogin: action.payload
             }
         },
         throw (state, action) {
