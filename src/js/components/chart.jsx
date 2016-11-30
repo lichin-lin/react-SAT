@@ -49,6 +49,7 @@ export default class extends Component {
                         data: [4, 10, 10, 10, 7, 10, 10, 9, 6, 12]
                     },
                     {
+                        label: 'English',
                         fillColor: 'rgba(46,135,170,0.05)',
                         strokeColor: 'rgba(46,135,170,1)',
                         pointColor: 'rgba(46,135,170,1)',
@@ -58,6 +59,7 @@ export default class extends Component {
                         data: [10, 4, 10, 10, 10, 8, 10, 12, 10, 8]
                     },
                     {
+                        label: 'Math',
                         fillColor: 'rgba(245,210,95,0.05)',
                         strokeColor: 'rgba(245,210,95,1)',
                         pointColor: 'rgba(245,210,95,1)',
@@ -67,6 +69,7 @@ export default class extends Component {
                         data: [5, 1, 6, 6, 10, 10, 10, 12, 10, 4]
                     },
                     {
+                        label: 'Society',
                         fillColor: 'rgba(105,150,90,0.05)',
                         strokeColor: 'rgba(105,150,90,1)',
                         pointColor: 'rgba(105,150,90,1)',
@@ -76,6 +79,7 @@ export default class extends Component {
                         data: [10, 4, 6, 10, 10, 12, 10, 12, 10, 2]
                     },
                     {
+                        label: 'Science',
                         fillColor: 'rgba(80,80,80,0.05)',
                         strokeColor: 'rgba(80,80,80,1)',
                         pointColor: 'rgba(80,80,80,1)',
@@ -115,22 +119,45 @@ export default class extends Component {
     }
 
     changedata () {
-        let randomArray = new Array(10)
+        let totalDataArray = new Array(10)
+        let singleDataArray = new Array(5)
+        // init single data
+        for (let i = 0; i < 5; i++) {
+            singleDataArray[i] = new Array(10)
+            for (let j = 0; j < 10; j++) {
+                singleDataArray[i][j] = 0
+            }
+        }
+        console.log(singleDataArray)
+        // init total data
         for (let i = 0; i < 10; i++) {
-            randomArray[i] = 0
+            totalDataArray[i] = 0
         }
         var chartDataObj = this.props.userData.TotalScore.score
         for (var key in chartDataObj) {
             var yearTotalScore = 0
+            // SAT2007 -> 2007 -> 0
+            var mappingIndex = parseInt(key.slice(3)) - 2007
+            let subjectCount = 0
             for (var subject in chartDataObj[key]) {
+                console.log('index: ', mappingIndex, ', sub: ', subjectCount, 'score: ', chartDataObj[key][subject])
                 yearTotalScore += chartDataObj[key][subject]
+                singleDataArray[subjectCount][mappingIndex] = chartDataObj[key][subject]
+                subjectCount += 1
             }
-            var mappingIndex = key.slice(3)
-            randomArray[parseInt(mappingIndex) - 2007] = yearTotalScore
+            totalDataArray[mappingIndex] = yearTotalScore
         }
-        var newArray = _.extend({}, this.state.totalChartData)
-        newArray.datasets[0].data = randomArray
+        // put total data back to state.
+        let newArray = _.extend({}, this.state.totalChartData)
+        newArray.datasets[0].data = totalDataArray
         this.setState({datasets: newArray})
+
+        // put single data back to state.
+        for (let i = 0; i < 5; i++) {
+            let newArray = _.extend({}, this.state.singleChartData)
+            newArray.datasets[i].data = singleDataArray[i]
+            this.setState({datasets: newArray})
+        }
     }
 
     isUserLogin () {
@@ -177,11 +204,11 @@ export default class extends Component {
               <Row>
               <Col xs={12} md={12}>
                   <h2>總覽</h2>
-                  <Line data={this.state.totalChartData} options={this.state.chartOptions} redraw={true} width="600" height="250"/>
+                  <Line data={this.state.totalChartData} options={this.state.chartOptions} redraw={true} width="600" height="300"/>
               </Col>
               <Col xs={12} md={12}>
                   <h2>單科</h2>
-                  <Line data={this.state.singleChartData} options={this.state.singleChartOptions} redraw={true} width="600" height="250"/>
+                  <Line data={this.state.singleChartData} options={this.state.singleChartOptions} redraw={true} width="600" height="300"/>
               </Col>
               </Row>
             </Grid>
