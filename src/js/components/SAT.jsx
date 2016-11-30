@@ -22,16 +22,16 @@ export default class extends Component {
             message: '',
             selectedYear: 96,
             scoreResult: '',
-            OriChinese: 0,
-            OriEnglish: 0,
-            OriMath: 0,
-            OriSociety: 0,
-            OriScience: 0
+            chinese: 0,
+            english: 0,
+            math: 0,
+            social: 0,
+            sience: 0
         }
         this.printResult = this.printResult.bind(this)
         this.onFormSubmit = this.onFormSubmit.bind(this)
         this.handleSelectChange = this.handleSelectChange.bind(this)
-        this.setScoreToInputBox = this.setScoreToInputBox.bind(this)
+        this.handleInputChange = this.handleInputChange.bind(this)
     }
     onFormSubmit (event) {
         event.preventDefault()
@@ -94,23 +94,30 @@ export default class extends Component {
     handleSelectChange (event) {
         this.setState({selectedYear: event.target.value})
         this.props.getYearData(this.state.selectedYear)
-        var yearIndex = 'SAT' + (1911 + this.state.selectedYear)
+        var yearIndex = 'SAT' + (1911 + parseInt(this.state.selectedYear))
+        console.log('here wrong', yearIndex)
         this.props.getScoreData(yearIndex)
-        this.setScoreToInputBox()
     }
 
-    setScoreToInputBox () {
-        var q = this.props.userData.StudentScore
-        reactDOM.findDOMNode(this.refs.Science).value = q.science
+    handleInputChange (event) {
+        var tmp = {}
+        tmp[event.target.name] = event.target.value
+        this.setState(tmp)
+    }
+
+    componentWillReceiveProps (nextProps) {
+        this.setState({
+            ...nextProps.userData.StudentScore
+        })
     }
 
     componentDidMount () {
     }
 
     componentWillMount () {
-        console.log('---- here ----')
     }
     render () {
+        console.log('render', this.state)
         return (
         <div>
             <Grid>
@@ -126,28 +133,23 @@ export default class extends Component {
                     </FormGroup>
                     <FormGroup controlId="formControlsInput">
                       <ControlLabel>國文 Chinese</ControlLabel>
-                      <FormControl type="number" placeholder="原始分數" defaultValue="0" ref="Chinese">
-                      </FormControl>
+                      <FormControl type="number" placeholder="0" name="chinese" value={this.state.chinese || ''} onChange={this.handleInputChange} />
                     </FormGroup>
                     <FormGroup controlId="formControlsInput">
                       <ControlLabel>英文 English</ControlLabel>
-                      <FormControl type="number" placeholder="原始分數" defaultValue="0" ref="English">
-                      </FormControl>
+                      <FormControl type="number" placeholder="0" name="english" value={this.state.english || ''} onChange={this.handleInputChange} />
                     </FormGroup>
                     <FormGroup controlId="formControlsInput">
                       <ControlLabel>數學 Math</ControlLabel>
-                      <FormControl type="number" placeholder="原始分數" defaultValue="0" ref="Math">
-                      </FormControl>
+                      <FormControl type="number" placeholder="0" name="math" value={this.state.math || ''} onChange={this.handleInputChange} />
                     </FormGroup>
                     <FormGroup controlId="formControlsInput">
                       <ControlLabel>社會 Society</ControlLabel>
-                      <FormControl type="number" placeholder="原始分數" defaultValue="0" ref="Society">
-                      </FormControl>
+                      <FormControl type="number" placeholder="0" name="social" value={this.state.social || ''} onChange={this.handleInputChange} />
                     </FormGroup>
                     <FormGroup controlId="formControlsInput">
                       <ControlLabel>自然 Science</ControlLabel>
-                      <FormControl type="number" placeholder="原始分數" defaultValue="0" ref="Science">
-                      </FormControl>
+                      <FormControl type="number" placeholder="0" name="science" value={this.state.science || ''} onChange={this.handleInputChange} />
                     </FormGroup>
                     <FormGroup controlId="formControlsInput">
                       <ControlLabel>轉換結果</ControlLabel>

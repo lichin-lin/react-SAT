@@ -15,7 +15,7 @@ export default class Root extends Component {
                     <IndexRoute component={Containers.Base} />
                     {/* <Route path="setting" component={Components.Setting} /> */}
                     <Route path="SAT" component={Containers.SAT} />
-                    {/* <Route path="chart" component={Components.Chart} /> */}
+                    <Route path="chart" component={Containers.Chart} />
                     <Route path="firebase" component={Containers.FirebaseTest} />
                 </Route>
             </Router>

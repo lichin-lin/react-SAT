@@ -13,6 +13,7 @@ export default {
     getScoreData: function (index) {
         var userId = firebase.auth().currentUser.uid
         console.log(userId)
+        userId = 'qqq'
         return firebase.database().ref('/users/' + userId + '/init/' + index).once('value').then(function (snapshot) {
             return snapshot.val()
         })
@@ -20,6 +21,13 @@ export default {
     getYearData: function (year) {
         // let data = '1'
         return firebase.database().ref('/table/SAT' + (1911 + year)).once('value').then(function (snapshot) {
+            return snapshot.val()
+        })
+    },
+    getUserTotalYearData: function () {
+        var userId = firebase.auth().currentUser.uid
+        console.log(userId)
+        return firebase.database().ref('/users/' + userId).once('value').then(function (snapshot) {
             return snapshot.val()
         })
     },

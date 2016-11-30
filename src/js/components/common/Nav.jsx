@@ -22,8 +22,8 @@ export default class extends Component {
                     <LinkContainer to="/setting">
                         <NavItem>setting</NavItem>
                     </LinkContainer>
-                    <LinkContainer to="/score">
-                        <NavItem>score</NavItem>
+                    <LinkContainer to="/SAT">
+                        <NavItem>SAT</NavItem>
                     </LinkContainer>
                     <LinkContainer to="/chart">
                         <NavItem>chart</NavItem>
