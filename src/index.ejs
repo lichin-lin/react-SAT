@@ -3,6 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="React-PWA">
+    <link rel="apple-touch-icon" href="./src/images/favicon-144x144.png">
+    <link rel="shortcut icon" href="./src/favicon.ico">
+    <link rel="manifest" href="./manifest.json">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -18,4 +24,12 @@
 <body>
     <div id="app">Rendering</div>
 </body>
+<script>
+  // if ('serviceWorker' in navigator) {
+  //   navigator.serviceWorker.register('service-worker.js').catch(function(ex) {
+  //     console.warn(ex);
+  //     console.warn('(This warning can be safely ignored outside of the production build.)');
+  //   });
+  // }
+</script>
 </html>

@@ -26,6 +26,7 @@
     "redux-promise": "^0.5.3",
     "redux-react-firebase": "^2.3.3",
     "redux-thunk": "^2.1.0",
+    "sw-precache": "^4.2.3",
     "url-join": "^1.1.0",
     "url-loader": "^0.5.7"
   },
@@ -77,7 +78,7 @@
   "scripts": {
     "start": "node server.js",
     "lint": "eslint src",
-    "build": "NODE_ENV=production webpack -p --progress  --config ./webpack.production.config.js",
+    "build": "NODE_ENV=production webpack -p --progress  --config ./webpack.production.config.js && sw-precache --config=sw-precache-config.js",
     "dev": "NODE_ENV=development node server.js"
   },
   "repository": {

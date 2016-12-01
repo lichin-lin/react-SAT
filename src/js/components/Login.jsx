@@ -11,7 +11,7 @@ export default class Base extends Component {
         this.FBLogin = this.FBLogin.bind(this)
         this.state = {
             fakeNum: 50,
-            userId: cookie.load('userId')
+            userId: ''
         }
     }
     FBLogin () {
@@ -21,6 +21,14 @@ export default class Base extends Component {
             // cookie.save('userId', userId, { path: '/' })
             browserHistory.push('/SAT')
         })
+    }
+    componentWillMount () {
+        console.log(this.state.userId)
+        var tmp = cookie.load('satuser-fuck')
+        this.setState({userId: tmp})
+        console.log(this.state.userId)
+        cookie.save('satuser-fuck', this.state.userId, { path: '/login' })
+        // console.log(this.state.userId)
     }
     render () {
         return (
