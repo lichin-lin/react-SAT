@@ -34,16 +34,11 @@ export default handleActions({
         }
     },
 
-    isUserLogin: {
+    CookieLogin: {
         next (state, action) {
             return {
                 ...state,
-                isLogin: action.payload
-            }
-        },
-        throw (state, action) {
-            return {
-                ...state
+                AuthData: action.payload
             }
         }
     },

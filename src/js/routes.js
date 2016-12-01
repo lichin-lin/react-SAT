@@ -9,7 +9,7 @@ import Containers from 'js/containers'
 
 const checkLogin = (next) => {
     if (Object.keys(store.getState().Session.AuthData).length === 0) {
-        location.href = '/login/'
+        browserHistory.push('/login')
     }
 }
 
@@ -22,7 +22,7 @@ export default class Root extends Component {
                     <Route path="SAT" component={Containers.SAT} />
                     <Route path="chart" component={Containers.Chart} />
                 </Route>
-                <Route path="/login/" component={Containers.Login} />
+                <Route path="/login" component={Containers.Login} />
             </Router>
 
         )

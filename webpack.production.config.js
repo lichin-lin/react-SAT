@@ -24,7 +24,13 @@ module.exports = {
         progress: true
     },
     resolve: {
-        extensions: ['', '.js', '.jsx']
+        extensions: ['', '.js', '.jsx'],
+        alias: {
+            'src': path.join(__dirname, './src'),
+            'containers': path.join(__dirname, './src/js/containers'),
+            'components': path.join(__dirname, './src/js/components'),
+            'js': path.join(__dirname, './src/js')
+        }
     },
     module: {
         loaders: [

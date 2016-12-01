@@ -6,7 +6,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    FBLogin: () => dispatch(Action.Session.FBLogin())
+    FBLogin: () => dispatch(Action.Session.FBLogin()),
+    CookieLogin: (data) => dispatch(Action.Session.CookieLogin(data))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Components.Login)

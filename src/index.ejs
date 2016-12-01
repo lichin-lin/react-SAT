@@ -22,14 +22,14 @@
     </script>
 </head>
 <body>
-    <div id="app">Rendering</div>
+    <div id="app"></div>
 </body>
 <script>
-  // if ('serviceWorker' in navigator) {
-  //   navigator.serviceWorker.register('service-worker.js').catch(function(ex) {
-  //     console.warn(ex);
-  //     console.warn('(This warning can be safely ignored outside of the production build.)');
-  //   });
-  // }
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('service-worker.js').catch(function(ex) {
+      console.warn(ex);
+      console.warn('(This warning can be safely ignored outside of the production build.)');
+    });
+  }
 </script>
 </html>

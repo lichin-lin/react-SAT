@@ -4,7 +4,8 @@ import cookie from 'react-cookie'
 
 export default class Base extends Component {
     static propTypes = {
-        FBLogin: PropTypes.func.isRequired
+        FBLogin: PropTypes.func.isRequired,
+        currentUser: PropTypes.object.isRequired
     };
     constructor (props) {
         super(props)
@@ -15,20 +16,21 @@ export default class Base extends Component {
         }
     }
     FBLogin () {
-        this.props.FBLogin().then(() => {
-            console.log('here')
-            // this.setState({ })
-            // cookie.save('userId', userId, { path: '/' })
+        this.props.FBLogin().then((state) => {
+            cookie.save('user', state.payload)
             browserHistory.push('/SAT')
         })
     }
     componentWillMount () {
-        console.log(this.state.userId)
-        var tmp = cookie.load('satuser-fuck')
-        this.setState({userId: tmp})
-        console.log(this.state.userId)
-        cookie.save('satuser-fuck', this.state.userId, { path: '/login' })
-        // console.log(this.state.userId)
+        let user = cookie.load('user')
+        console.log(user)
+        if (user === undefined) {
+            // not login yet.
+        } else {
+            this.props.CookieLogin(user).then(() => {
+                browserHistory.push('/SAT')
+            })
+        }
     }
     render () {
         return (

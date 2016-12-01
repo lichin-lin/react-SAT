@@ -61,7 +61,7 @@ export default CSSModules(class extends Component {
                         pointStrokeColor: '#fff',
                         pointHighlightFill: '#fff',
                         pointHighlightStroke: 'rgba(220,220,220,1)',
-                        data: [10, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+                        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
                     },
                     {
                         label: 'Math',
@@ -201,6 +201,10 @@ export default CSSModules(class extends Component {
                         <Col xs={12} md={12}>
                             <h2>單科</h2>
                             <Line data={this.state.singleChartData} options={this.state.singleChartOptions} width={600} height={400}/>
+                        </Col>
+                        <Col xs={12} md={12}>
+                            <h2>排名</h2>
+                            <div>功能尚未推出，請耐心等待</div>
                         </Col>
                     </Row>
                 </Grid>
