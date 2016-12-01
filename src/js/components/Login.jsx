@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { browserHistory } from 'react-router'
+import cookie from 'react-cookie'
+
 export default class Base extends Component {
     static propTypes = {
         FBLogin: PropTypes.func.isRequired
@@ -8,13 +10,16 @@ export default class Base extends Component {
         super(props)
         this.FBLogin = this.FBLogin.bind(this)
         this.state = {
-            fakeNum: 50
+            fakeNum: 50,
+            userId: cookie.load('userId')
         }
     }
     FBLogin () {
         this.props.FBLogin().then(() => {
             console.log('here')
-            browserHistory.push('/')
+            // this.setState({ })
+            // cookie.save('userId', userId, { path: '/' })
+            browserHistory.push('/SAT')
         })
     }
     render () {

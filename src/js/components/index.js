@@ -6,7 +6,6 @@ import FirebaseTest from './FirebaseTest'
 import Login from './Login'
 import NotFound from './NotFound'
 import SAT from './SAT'
-import Setting from './setting'
 export default {
     common,
     App,
@@ -15,6 +14,5 @@ export default {
     FirebaseTest,
     Login,
     NotFound,
-    SAT,
-    Setting
+    SAT
 }

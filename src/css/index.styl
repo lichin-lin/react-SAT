@@ -130,3 +130,31 @@ h2
     p
       color $white
       font-size 1.5em
+
+
+.info_section
+  margin 20px 0
+  padding 0 20px
+  .info_content
+    letter-spacing 2px
+    font-size 1.5em
+    color $black
+    .web
+      margin-right 10px
+    .star
+      color rgba(#fcb314, 0.75)
+    a
+      color $black
+      position relative
+      text-decoration none
+      font-size 0.75em
+      cursor pointer
+      &:after
+        content ""
+        width 100%
+        height 5px
+        background-color rgba($fb_color, 0.35)
+        border-radius 1px
+        position absolute
+        bottom 0px
+        left 0

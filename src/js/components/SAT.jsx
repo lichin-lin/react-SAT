@@ -120,7 +120,6 @@ export default class extends Component {
     componentWillMount () {
     }
     render () {
-        console.log('render', this.state)
         return (
         <div>
             <Grid>

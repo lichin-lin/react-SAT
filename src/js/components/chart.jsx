@@ -179,7 +179,6 @@ export default CSSModules(class extends Component {
     }
 
     render () {
-        console.log('render', this.state)
         return (
             <div>
                 <Grid>

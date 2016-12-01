@@ -13,13 +13,7 @@ export default CSSModules(class extends Component {
                 <div className="body margin-top">
                     { this.props.children }
                 </div>
-                {/* <Components.common.Footer /> */}
-                {/* <div>
-                    <button onClick={this.props.FBLogin}>login</button>
-                    <button onClick={this.props.FBLogout}>logout</button>
-                    <button onClick={this.props.getUserData}>get user data</button>
-                </div> */}
-                { process.env.NODE_ENV !== 'production' ? <Containers.DevTools/> : null }
+                {/* { process.env.NODE_ENV !== 'production' ? <Containers.DevTools/> : null } */}
             </div>
         )
     }

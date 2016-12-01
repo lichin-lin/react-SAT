@@ -25,12 +25,9 @@ export default class extends Component {
                     <LinkContainer to="/chart">
                         <NavItem>chart</NavItem>
                     </LinkContainer>
-                    <LinkContainer to="/setting">
-                        <NavItem>setting</NavItem>
+                    <LinkContainer to="/">
+                        <NavItem>home</NavItem>
                     </LinkContainer>
-                    {/* <LinkContainer to="/firebase">
-                        <NavItem>firebase</NavItem>
-                    </LinkContainer> */}
                 </Nav>
             </Navbar.Collapse>
         </Navbar>

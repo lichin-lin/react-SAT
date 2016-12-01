@@ -19,10 +19,8 @@ export default class Root extends Component {
             <Router history={history}>
                 <Route path="/" component={Containers.App} onEnter={checkLogin} >
                     <IndexRoute component={Containers.Base} />
-                    {/* <Route path="setting" component={Components.Setting} /> */}
                     <Route path="SAT" component={Containers.SAT} />
                     <Route path="chart" component={Containers.Chart} />
-                    {/* <Route path="firebase" component={Containers.FirebaseTest} /> */}
                 </Route>
                 <Route path="/login/" component={Containers.Login} />
             </Router>
