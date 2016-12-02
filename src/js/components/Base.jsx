@@ -19,8 +19,9 @@ export default class Base extends Component {
                   <div className="info_section">
                       <h2>關於 級分計算機:</h2>
                       <div className="info_content">
-                          這項服務並非教育部任何相關機構維護，
-                          只是提供一個快速轉換分數的練習作品，
+                          這是一個單純的學測級分計算機，
+                          此服務並非由教育部任何相關機構維護，
+                          只是提供一個個人學習上練習的作品，
                           其資料也不會有其他任何用途的使用，
                           若是有任何疑問、建議歡迎透過以下方式聯絡:
                           <a href="mailto:vic20087cjimlin@gmail.com?subject=[SAT.me] 相關問題提問"> vic20087cjimlin@gmail.com</a>
@@ -48,6 +49,7 @@ export default class Base extends Component {
                           如果對於我的作品感興趣的人歡迎到下面看看 :D
                           <br/>
                           <a href="https://lichin.me" className="web">個人網頁</a>
+                          <a href="https://github.com/lichin-lin" className="web">Github</a>
                           <a href="https://www.behance.net/lichin-lin" className="web">一些小設計</a>
                       </div>
                   </div>

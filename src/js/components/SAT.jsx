@@ -43,7 +43,7 @@ export default class extends Component {
             English: parseInt(this.state.English), // parseInt(reactDOM.findDOMNode(this.refs.English).value),
             Math: parseInt(this.state.Math),       // parseInt(reactDOM.findDOMNode(this.refs.Math).value),
             Science: parseInt(this.state.Science),
-            Society: parseInt(this.state.Social)
+            Society: parseInt(this.state.Society)
         }
         this.props.updateUserScore('init', OriYear, OriData)
 

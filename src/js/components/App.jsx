@@ -13,7 +13,7 @@ export default CSSModules(class extends Component {
                 <div className="body margin-top">
                     { this.props.children }
                 </div>
-                {/* { process.env.NODE_ENV !== 'production' ? <Containers.DevTools/> : null } */}
+                { process.env.NODE_ENV !== 'production' ? <Containers.DevTools/> : null }
             </div>
         )
     }
