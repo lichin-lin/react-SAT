@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import { browserHistory } from 'react-router'
 import cookie from 'react-cookie'
-
-export default class Base extends Component {
+import CSSModules from 'react-css-modules'
+export default CSSModules(class Base extends Component {
     static propTypes = {
         FBLogin: PropTypes.func.isRequired,
         currentUser: PropTypes.object.isRequired
@@ -47,4 +47,4 @@ export default class Base extends Component {
             </div>
         )
     }
-}
+}, require('./Login.styl'))

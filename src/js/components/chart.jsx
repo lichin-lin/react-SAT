@@ -22,6 +22,9 @@ export default CSSModules(class extends Component {
         this.state = {
             counter: 0,
             fakeNum: 50,
+            avg: 0,
+            height: 400,
+            width: 400,
             totalChartData: {
                 labels: ['96', '97', '98', '99', '100', '101', '102', '103', '104', '105'],
                 datasets: [
@@ -116,6 +119,12 @@ export default CSSModules(class extends Component {
                 // legendTemplate: '<ul class=\'<%=name.toLowerCase()%>-legend\'><% for (var i=0; i<datasets.length; i++){%><li><span style=\'background-color:<%=datasets[i].strokeColor%>\'><%if(datasets[i].label){%><%=datasets[i].label%><%}%>級分</span></li><%}%></ul>'
             },
             singleChartOptions: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        boxWidth: 12
+                    }
+                }
                 // responsive: true,
                 // maintainAspectRatio: true,
                 // bezierCurveTension: 0.25,
@@ -128,6 +137,7 @@ export default CSSModules(class extends Component {
         }
         this.changedata = this.changedata.bind(this)
         this.getUserTotalYearData = this.getUserTotalYearData.bind(this)
+        this.updateChartSize = this.updateChartSize.bind(this)
     }
 
     changedata () {
@@ -140,7 +150,9 @@ export default CSSModules(class extends Component {
                 singleDataArray[i][j] = 0
             }
         }
-
+        // init avg params
+        var avgCounter = 0
+        var avgNum = 0
         // init total data
         for (let i = 0; i < 10; i++) {
             totalDataArray[i] = 0
@@ -158,7 +170,12 @@ export default CSSModules(class extends Component {
                 subjectCount += 1
             }
             totalDataArray[mappingIndex] = yearTotalScore
+            if (yearTotalScore > 0) {
+                avgCounter += 1
+                avgNum += yearTotalScore
+            }
         }
+        this.setState({avg: (avgNum / avgCounter).toFixed(2)})
 
         // put total data back to state.
         let newArray = _.extend({}, this.state.totalChartData)
@@ -173,11 +190,27 @@ export default CSSModules(class extends Component {
         }
         this.setState({counter: this.state.counter + 1})
     }
-
+    updateChartSize () {
+        var w = window
+        var d = document
+        var documentElement = d.documentElement
+        var body = d.getElementsByTagName('body')[0]
+        var width = w.innerWidth || documentElement.clientWidth || body.clientWidth
+        width *= 0.9
+        var height = width * 3 / 4
+        console.log('resize', width, height)
+        this.setState({width: width, height: height})
+        console.log('yo', this.state.width, this.state.height)
+    }
     getUserTotalYearData () {
         this.props.getUserTotalYearData()
     }
-
+    componentWillMount () {
+        this.props.getUserTotalYearData()
+    }
+    componentDidMount () {
+        window.addEventListener('resize', this.updateChartSize)
+    }
     render () {
         return (
             <div>
@@ -189,22 +222,26 @@ export default CSSModules(class extends Component {
                     </Row>
                     <Row>
                         <Col xs={12} md={12}>
-                            <button className="sat_btn" onClick={this.getUserTotalYearData}>取得歷年資料</button>
-                            <button className="sat_btn" onClick={this.changedata}>更新歷年資料</button>
+                            <button className="sat_btn" onClick={this.getUserTotalYearData}>取得級分資料</button>
+                            <button className="sat_btn" onClick={this.changedata}>更新級分圖表</button>
                         </Col>
                     </Row>
-                    <Row key={this.state.counter}>
-                        <Col xs={12} md={12}>
+                    <Row key={this.state.counter} className="chart_card_contain">
+                        <Col xs={12} md={12} className="chart_card">
                             <h2>總覽</h2>
-                            <Line data={this.state.totalChartData} options={this.state.chartOptions} width={600} height={400}/>
+                            <Line data={this.state.totalChartData} options={this.state.chartOptions} redraw={true} width={this.state.width} height={this.state.height}/>
                         </Col>
-                        <Col xs={12} md={12}>
+                        <Col xs={12} md={12} className="chart_card">
                             <h2>單科</h2>
-                            <Line data={this.state.singleChartData} options={this.state.singleChartOptions} width={600} height={400}/>
+                            <Line data={this.state.singleChartData} options={this.state.singleChartOptions} redraw={true} width={this.state.width} height={this.state.height}/>
                         </Col>
-                        <Col xs={12} md={12}>
+                        <Col xs={12} md={12} className="chart_card">
+                            <h2>平均</h2>
+                            <div className="chart_titleText">{this.state.avg}</div>
+                        </Col>
+                        <Col xs={12} md={12} className="chart_card">
                             <h2>排名</h2>
-                            <div>功能尚未推出，請耐心等待</div>
+                            <div className="chart_contentText">功能尚未推出，請耐心等待</div>
                         </Col>
                     </Row>
                 </Grid>

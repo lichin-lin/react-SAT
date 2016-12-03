@@ -36,7 +36,7 @@ export default class Base extends Component {
                           將資料放在 firebase 上面並做了權限處理，
                           以防止資料被任意更改。未來會再加上離線功能以及手機 app 版本(主要使用 PWA)，
                           讓使用更加方便。如果對於此作品有興趣或這是需要一些範例，
-                          歡迎到 <a href="https://github.com/lichin-lin">github</a> 上給我個<span className="star">星星</span>並使用看看，謝謝。
+                          歡迎到 <a href="https://github.com/lichin-lin" target="_blank">github</a> 上給我個<span className="star">星星</span>並使用看看，謝謝。
                       </div>
                   </div>
               </Row>
@@ -48,9 +48,9 @@ export default class Base extends Component {
                           並製作些小作品給大家使用當做自我的練習，
                           如果對於我的作品感興趣的人歡迎到下面看看 :D
                           <br/>
-                          <a href="https://lichin.me" className="web">個人網頁</a>
-                          <a href="https://github.com/lichin-lin" className="web">Github</a>
-                          <a href="https://www.behance.net/lichin-lin" className="web">一些小設計</a>
+                          <a href="https://lichin.me" className="web" target="_blank">個人網頁</a>
+                          <a href="https://github.com/lichin-lin" className="web" target="_blank">Github</a>
+                          <a href="https://www.behance.net/lichin-lin" className="web" target="_blank">一些小設計</a>
                       </div>
                   </div>
               </Row>
