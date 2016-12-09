@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import _ from 'lodash'
+import { mergeSort } from 'js-sorting'
 import {
     Line
 } from 'react-chartjs-2'
@@ -13,6 +14,7 @@ export default CSSModules(class extends Component {
     static propTypes = {
         FBLogin: PropTypes.func.isRequired,
         getYearData: PropTypes.func.isRequired,
+        // updateUserAvg: PropTypes.func.isRequired,
         getUserTotalYearData: PropTypes.func.isRequired,
         userData: PropTypes.object.isRequired,
         currentUser: PropTypes.object.isRequired
@@ -136,6 +138,7 @@ export default CSSModules(class extends Component {
             }
         }
         this.changedata = this.changedata.bind(this)
+        this.updateUserAvg = this.updateUserAvg.bind(this)
         this.getUserTotalYearData = this.getUserTotalYearData.bind(this)
         this.updateChartSize = this.updateChartSize.bind(this)
     }
@@ -175,6 +178,7 @@ export default CSSModules(class extends Component {
                 avgNum += yearTotalScore
             }
         }
+        this.props.updateUserAvg(avgNum / avgCounter)
         this.setState({avg: (avgNum / avgCounter).toFixed(2)})
 
         // put total data back to state.
@@ -205,8 +209,21 @@ export default CSSModules(class extends Component {
     getUserTotalYearData () {
         this.props.getUserTotalYearData()
     }
+    updateUserAvg () {
+        this.props.updateUserAvg()
+    }
     componentWillMount () {
         this.props.getUserTotalYearData()
+        // var tmp = mergeSort([5, 3, 2, 4, 1, 7, 4, 10])
+        // var l = tmp.length
+        // var input = 7
+        // var result = l
+        // for (var i = 0; i < l; i++) {
+        //     if (input < tmp[i]) {
+        //         result = i
+        //         break
+        //     }
+        // }
     }
     componentDidMount () {
         window.addEventListener('resize', this.updateChartSize)

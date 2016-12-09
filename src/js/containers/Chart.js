@@ -10,6 +10,7 @@ const mapDispatchToProps = (dispatch) => ({
     FBLogin: () => dispatch(Action.Session.FBLogin()),
     isUserLogin: () => dispatch(Action.Session.isUserLogin()),
     getYearData: (year) => dispatch(Action.SAT.getYearData(year)),
+    updateUserAvg: (avg) => dispatch(Action.SAT.updateUserAvg(avg)),
     getUserTotalYearData: () => dispatch(Action.SAT.getUserTotalYearData())
 })
 

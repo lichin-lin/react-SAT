@@ -40,6 +40,13 @@ export default {
             Science: data.Science
         })
     },
+    updateUserAvg: function (avg) {
+        console.log('cout avg: ', avg)
+        var userId = firebase.auth().currentUser.uid
+        firebase.database().ref('users/' + userId + '/').update({
+            avg: avg
+        })
+    },
     isUserLogin: function () {
         var user = firebase.auth().currentUser
         console.log('user:', user)

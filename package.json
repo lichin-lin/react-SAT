@@ -11,6 +11,7 @@
     "firebase": "^3.6.1",
     "history": "^4.3.0",
     "immutable": "^3.8.1",
+    "js-sorting": "^3.0.4",
     "query-string": "^4.2.3",
     "react": "^15.4.1",
     "react-chartjs": "^0.8.0",
@@ -26,6 +27,7 @@
     "redux-promise": "^0.5.3",
     "redux-react-firebase": "^2.3.3",
     "redux-thunk": "^2.1.0",
+    "sorted-array": "^2.0.1",
     "sw-precache": "^4.2.3",
     "url-join": "^1.1.0",
     "url-loader": "^0.5.7"

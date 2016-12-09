@@ -67,6 +67,20 @@ export default handleActions({
         }
     },
 
+    updateUserAvg: {
+        next (state, action) {
+            return {
+                ...state,
+                ...action.payload
+            }
+        },
+        throw (state, action) {
+            return {
+                ...state
+            }
+        }
+    },
+
     default: (state, action) => {
         return {
             ...state
