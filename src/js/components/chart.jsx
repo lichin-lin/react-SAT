@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import _ from 'lodash'
-import { mergeSort } from 'js-sorting'
+// import { mergeSort } from 'js-sorting'
 import {
     Line
 } from 'react-chartjs-2'
@@ -167,7 +167,7 @@ export default CSSModules(class extends Component {
             var mappingIndex = parseInt(key.slice(3)) - 2007
             let subjectCount = 0
             for (var subject in chartDataObj[key]) {
-                console.log('index: ', mappingIndex, ', sub: ', subjectCount, 'score: ', chartDataObj[key][subject])
+                // console.log('index: ', mappingIndex, ', sub: ', subjectCount, 'score: ', chartDataObj[key][subject])
                 yearTotalScore += chartDataObj[key][subject]
                 singleDataArray[subjectCount][mappingIndex] = chartDataObj[key][subject]
                 subjectCount += 1
@@ -202,9 +202,9 @@ export default CSSModules(class extends Component {
         var width = w.innerWidth || documentElement.clientWidth || body.clientWidth
         width *= 0.9
         var height = width * 3 / 4
-        console.log('resize', width, height)
+        // console.log('resize', width, height)
         this.setState({width: width, height: height})
-        console.log('yo', this.state.width, this.state.height)
+        // console.log('yo', this.state.width, this.state.height)
     }
     getUserTotalYearData () {
         this.props.getUserTotalYearData()

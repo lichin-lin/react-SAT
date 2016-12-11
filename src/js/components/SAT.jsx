@@ -55,13 +55,13 @@ export default class extends Component {
             if (!OriData.hasOwnProperty(key)) continue
             // get Original score, then do transfer.
             var score = OriData[key]
-            console.log(this.props)
+            // console.log(this.props)
             var compareList = this.props.userData.MeasureScore[mappingTable[mIndex]]
 
             if (score === 0) {
                 mappingValue[mIndex] = 0
             } else {
-                console.log('here=======', compareList)
+                // console.log('here=======', compareList)
                 for (let k = 0; k <= 15; k++) {
                     if (score < compareList[k]) {
                         mappingValue[mIndex] = k
@@ -124,7 +124,7 @@ export default class extends Component {
         <div>
             <Grid>
                 <form role="form" onSubmit={this.onFormSubmit}>
-                    <h1>轉換級分 {this.state.selectedYear} 年</h1>
+                    <h1>轉換 {this.state.selectedYear} 年原始分數</h1>
                     <FormGroup controlId="formControlsSelect">
                       <ControlLabel>選擇年份 choose year</ControlLabel>
                       <FormControl componentClass="select" placeholder="select" onChange={this.handleSelectChange}>
@@ -160,12 +160,13 @@ export default class extends Component {
                       <ControlLabel>社會 Society</ControlLabel>
                       <FormControl type="number" placeholder="0" name="Society" value={this.state.Society || ''} onChange={this.handleInputChange} />
                     </FormGroup>
+                    <button type="submit" className="btn btn-primary sat_btn">轉換並儲存</button>
+                    <br/><br/>
                     <FormGroup controlId="formControlsInput">
-                      <ControlLabel>轉換結果</ControlLabel>
+                      <ControlLabel>轉換級分結果</ControlLabel>
                       <FormControl type="text" placeholder="原始分數" value={this.state.scoreResult} disabled>
                       </FormControl>
                     </FormGroup>
-                    <button type="submit" className="btn btn-primary sat_btn">轉換並儲存</button>
                 </form>
                 <br/><br/>
             </Grid>

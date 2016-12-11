@@ -15,6 +15,18 @@ export default class Base extends Component {
     render () {
         return (
             <Grid>
+                <Row>
+                    <div className="info_section">
+                        <h2>關於 學測:</h2>
+                        <div className="info_content">
+                            大學學科能力測驗 (General Scholastic Ability Test)
+                            是一種用於測驗高中學生，
+                            是否具備基本的知識，
+                            以進入台灣各大學就讀的大型考試，
+                            由大學入學考試中心(大考中心)負責統籌舉辦。
+                        </div>
+                    </div>
+                </Row>
               <Row>
                   <div className="info_section">
                       <h2>關於 級分計算機:</h2>
